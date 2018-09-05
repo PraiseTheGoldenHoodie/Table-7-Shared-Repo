@@ -1,0 +1,41 @@
+-----------------------------------------------------
+Workflow (aka commands you will use a lot)
+1.   git pull
+2.   git add <filename>
+2.   git add .
+3.   git status
+2&3. git commit -m "commit message"
+		-a  # performs {git add . } before commit
+4.   git push [origin <branchname>]
+4.   git push --all [origin]
+-----------------------------------------------------
+-----------------------------------------------------
+Add project (without vcs yet) to new GitHub:
+1.	Create blank GitHub and follow steps provided there
+-----------------------------------------------------
+-----------------------------------------------------
+Add existing local repo to new GitHub:
+1.	Create blank GitHub repo, copy HTTPS URL
+2.	git remote add origin remote-repository-URL
+3.	git remote -v  # optional step
+4. 	git push -u origin master
+-----------------------------------------------------
+git checkout <branchname>
+	-b  # creates new branch before switching to it
+git branch  # lists all branches
+
+git merge <branchname>
+git diff <sourcebranch> <targetbranch>
+
+git branch -d <branchname>  # Deletes branch
+git push origin :<branchname>  # Deletes branch from remote repository
+
+If you mess up, you can replace the changes in your working tree with the last content in head:
+Changes already added to the index, as well as new files, will be kept.
+git checkout -- <filename>
+
+Instead, to drop all your local changes and commits, fetch the latest history from the server and point your local master branch at it, do this:
+{
+git fetch origin
+git reset --hard origin/master
+}
