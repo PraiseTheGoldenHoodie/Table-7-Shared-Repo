@@ -41,8 +41,8 @@ birth_month_4 = str(int(input("Month of Birth = ")))
 birth_day_4 = str(int(input("Day of Birth = ")))
 space_l = 40
 space_r = 20
-print("Name".ljust(space_l) + "Date of Birth".rjust(space_r))
-print("----".ljust(space_l) + "-------------".rjust(space_r))
+print("Name".ljust(space_l) + "Date of Birth (D-M-Y)".rjust(space_r))
+print("----".ljust(space_l) + "---------------------".rjust(space_r))
 print(full_name_1.ljust(space_l) + (birth_day_1 + "-" + birth_month_1 + "-" + birth_year_1).rjust(space_r))
 print(full_name_2.ljust(space_l) + (birth_day_2 + "-" + birth_month_2 + "-" + birth_year_2).rjust(space_r))
 print(full_name_3.ljust(space_l) + (birth_day_3 + "-" + birth_month_3 + "-" + birth_year_3).rjust(space_r))
