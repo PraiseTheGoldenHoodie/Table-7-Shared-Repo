@@ -1,1 +1,4 @@
-temp
+*.trash
+*.garbage
+*.xml
+*.iml
