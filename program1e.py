@@ -3,6 +3,7 @@
 # "I have not given or received any unauthorized aid on this assignment"
 #
 # Name: Alexander Bockelman
+#       Jackson Sanders
 #       Patrick Chai
 #       Jose Carrillo
 #       Wayne Ussery
@@ -12,4 +13,4 @@
 
 v_1 = float(input("Enter Velocity in Miles per Hour: "))
 v_2 = v_1*(44.704/100)
-print("Velocity in Meters per Second: ", v_2)
+print("Velocity in Meters per Second: ", v_2, "m/s")

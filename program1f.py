@@ -13,4 +13,4 @@
 
 Temp_f = float(input("Enter Temperature in Fahrenheit: "))
 Temp_c = (Temp_f - 32)*(5/9)
-print("Temperature in Celsius: ", Temp_c)
+print("Temperature in Celsius: ", Temp_c, "°C")
