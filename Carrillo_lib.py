@@ -1,6 +1,8 @@
 # Here are some functions I wrote you all might find useful.
-# To use them, make sure Carrillo_lib_v0.0 is in your working directory. Then call
-# from Carrillo_lib_v0.0 import *
+# To use them, make sure Carrillo_lib is in your working directory. Then call
+# import Carrillo_lib
+#  or
+# from Carrillo_lib import *
 
 
 def box_formatter(in_strings, horizontal_line="-", whole_horizontal_line=False, side_decor="", corner_decor="", alignment=0):
