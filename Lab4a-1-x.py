@@ -11,7 +11,6 @@
 # Date:		19 9 2018
 
 from math import *
-tol = 0.001
 # Examples at beginning and what they yield
 # a = 1/7
 # print(a)
@@ -25,10 +24,12 @@ tol = 0.001
 # print(x)
 # print(x*x*3)  # = 1.0
 # print(x*3*x)  # = 0.99999...
-eq1 = "7/7"
-eq2 = "2/7 + 5/7"
-print("is {} the same as {}? {}".format(eq1, eq2, eval(eq1) == eval(eq2)))
-eq1 = "7/7"
-eq2 = "(1/7)*2 + (1/7)*5"
-print("is {} the same as {}? {}".format(eq1, eq2, eval(eq1) == eval(eq2)))
+tol = 0.001
+a = tan(pi/4)
+b = 1
+x = .9
+y= 1
+print("is {} the same as {}? {}".format(a, b, abs(a-b) <= tol))
+print("is {} the same as {}? {}".format(x, y, abs(x-y) <= tol))
+
 
