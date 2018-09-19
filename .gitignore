@@ -2,3 +2,4 @@
 *.garbage
 *.xml
 *.iml
+*.pyc
