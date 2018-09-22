@@ -5,6 +5,17 @@
 # from Carrillo_lib import *
 
 
+def xd_contains(xd_list, item):
+    """checks any-dimensional list to see if it contains an item. Item can be any type except list."""
+    if type(xd_list) is not list:
+        return xd_list == item
+    else:
+        for row in xd_list:
+            if xd_contains(row, item):
+                return True
+        return False
+
+
 def box_formatter(in_strings, horizontal_line="-", whole_horizontal_line=False, side_decor="", corner_decor="", alignment=0):
     """Takes list of text lines and puts them in a customizable box. Returns one string with UNIX EOL characters."""
     bar = horizontal_line
