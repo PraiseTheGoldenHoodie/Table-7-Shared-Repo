@@ -1,27 +1,34 @@
 points = 0
-gender = input("what is your gender? (M/F) ").upper()
-if gender != "M" and gender != "F":
-    gender = input("not a valid gender, please enter again (M/F) ").upper()
-    if gender != "M" and gender != "F":
-        print("you suck, assuming gender as male")
-        gender = "M"
+###############
+# User Inputs #
+###############
+sex = input("what is your gender? (M/F) ").upper()
+if sex != "M" and sex != "F":
+    sex = input("not a valid gender, please enter again (M/F) ").upper()
+    if sex != "M" and sex != "F":
+        print("still not valid, assuming gender as male")  # you suck
+        sex = "M"
 
-age = input("what is your age? ")
+age = float(input("what is your age? "))
 # since we can't use try-except yet, entering non-float will crash program. This goes for all float inputs too.
-age = float(age)
 
 smoke = input("do you smoke? (y/n) ").upper()
-if smoke != "Y" or smoke != "N":
-        print("not valid, you don't smoke")
-        smoke = False
+if smoke == "Y":
+    smoke = True
+elif smoke == "N":
+    smoke = False
+else:
+    print("invalid response, assuming you don't smoke")  # when you ASSUME, you make an ASS of U and ME
+    smoke = False
 
-HDL = input("what is your HDL? ")
-HDL = float(HDL)
+HDL = float(input("what is your HDL? "))
 
-sys_BP = input("what is your systolic BP? ")
-sys_BP = float(sys_BP)
+sys_BP = float(input("what is your systolic BP? "))
 
-if gender == "M":
+######################
+# Point calculations #
+######################
+if sex == "M":
     if age < 35:
         points -= 9
         # cholesterol
@@ -191,6 +198,7 @@ if gender == "M":
         else:
             points += 1
         # cholesterol
+# TODO: everything else besides cholesterol
 # TODO: females
 
 
