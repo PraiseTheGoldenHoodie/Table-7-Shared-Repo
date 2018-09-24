@@ -1,15 +1,17 @@
 points = 0
-gender = input("what is your gender? (M/F)").upper()
-if gender!="M" and gender!="F":
+gender = input("what is your gender? (M/F) ").upper()
+if gender != "M" and gender != "F":
     gender = input("not a valid gender, please enter again (M/F) ").upper()
     if gender != "M" and gender != "F":
-        print("you suck")
+        print("you suck, assuming gender as male")
+        gender = "M"
 
 age = input("what is your age? ")
+# since we can't use try-except yet, entering non-float will crash program. This goes for all float inputs too.
 age = float(age)
 
 smoke = input("do you smoke? (y/n) ").upper()
-if smoke !="Y" or smoke !="N":
+if smoke != "Y" or smoke != "N":
         print("not valid, you don't smoke")
         smoke = False
 
@@ -19,45 +21,43 @@ HDL = float(HDL)
 sys_BP = input("what is your systolic BP? ")
 sys_BP = float(sys_BP)
 
-if gender=="M":
-
-    if age<35:
-        points-=9
+if gender == "M":
+    if age < 35:
+        points -= 9
         # cholesterol
         tot_chol = input("what is your total cholesterol? ")
         tot_chol = float(tot_chol)
-        if tot_chol<160:
-            points+=0
-        elif tot_chol<200:
-            points+=4
-        elif tot_chol<240:
-            points+=7
-        elif tot_chol<280:
-            points+=9
+        if tot_chol < 160:
+            points += 0
+        elif tot_chol < 200:
+            points += 4
+        elif tot_chol < 240:
+            points += 7
+        elif tot_chol < 280:
+            points += 9
         else:
-            points+=11
-        #cholesterol
+            points += 11
+        # cholesterol
 
-    elif age<40:
-        points-=4
+    elif age < 40:
+        points -= 4
         # cholesterol
         tot_chol = input("what is your total cholesterol? ")
         tot_chol = float(tot_chol)
-        if tot_chol<160:
-            points+=0
-        elif tot_chol<200:
-            points+=4
-        elif tot_chol<240:
-            points+=7
-        elif tot_chol<280:
-            points+=9
+        if tot_chol < 160:
+            points += 0
+        elif tot_chol < 200:
+            points += 4
+        elif tot_chol < 240:
+            points += 7
+        elif tot_chol < 280:
+            points += 9
         else:
-            points+=11
+            points += 11
         # cholesterol
 
-
-    elif age<45:
-        points+=0
+    elif age < 45:
+        points += 0  # Is this line necessary?
         # cholesterol
         tot_chol = input("what is your total cholesterol? ")
         tot_chol = float(tot_chol)
@@ -73,8 +73,8 @@ if gender=="M":
             points += 8
         # cholesterol
 
-    elif age<50:
-        points+=3
+    elif age < 50:
+        points += 3
         # cholesterol
         tot_chol = input("what is your total cholesterol? ")
         tot_chol = float(tot_chol)
@@ -90,9 +90,8 @@ if gender=="M":
             points += 8
         # cholesterol
 
-
-    elif age<55:
-        points+=6
+    elif age < 55:
+        points += 6
         # cholesterol
         tot_chol = input("what is your total cholesterol? ")
         tot_chol = float(tot_chol)
@@ -108,9 +107,8 @@ if gender=="M":
             points += 5
         # cholesterol
 
-
-    elif age<60:
-        points+=8
+    elif age < 60:
+        points += 8
         # cholesterol
         tot_chol = input("what is your total cholesterol? ")
         tot_chol = float(tot_chol)
@@ -126,9 +124,8 @@ if gender=="M":
             points += 5
         # cholesterol
 
-
-    elif age<65:
-        points+=10
+    elif age < 65:
+        points += 10
         # cholesterol
         tot_chol = input("what is your total cholesterol? ")
         tot_chol = float(tot_chol)
@@ -144,9 +141,8 @@ if gender=="M":
             points += 3
         # cholesterol
 
-
-    elif age<70:
-        points+=11
+    elif age < 70:
+        points += 11
         # cholesterol
         tot_chol = input("what is your total cholesterol? ")
         tot_chol = float(tot_chol)
@@ -162,9 +158,8 @@ if gender=="M":
             points += 3
         # cholesterol
 
-
-    elif age<75:
-        points+=12
+    elif age < 75:
+        points += 12
         # cholesterol
         tot_chol = input("what is your total cholesterol? ")
         tot_chol = float(tot_chol)
@@ -179,10 +174,9 @@ if gender=="M":
         else:
             points += 1
         # cholesterol
-
 
     else:
-        points+=13
+        points += 13
         # cholesterol
         tot_chol = input("what is your total cholesterol? ")
         tot_chol = float(tot_chol)
@@ -197,7 +191,7 @@ if gender=="M":
         else:
             points += 1
         # cholesterol
-
+# TODO: females
 
 
 
