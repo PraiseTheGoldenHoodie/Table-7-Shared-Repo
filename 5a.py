@@ -1,30 +1,26 @@
-# SYSTOLIC BP IS BULLSHIT FIGURE IT OUT LATER, PUT AT BEGINNING OF MALE AND FEMALE SECTION
-
+# TODO: SYSTOLIC BP IS BULLSHIT FIGURE IT OUT LATER, PUT AT BEGINNING OF MALE AND FEMALE SECTION
 
 points = 0
 gender = input("what is your gender? (M/F)").upper()
 if gender != "M" and gender != "F":
     gender = input("not a valid gender, please enter again (M/F) ").upper()
     if gender != "M" and gender != "F":
-        print("you suck")
+        print("you suck, assuming gender as male")
 
-age = input("what is your age? ")
-age = float(age)
+age = float(input("what is your age? "))
 
 smoke = input("do you smoke? (y/n) ").upper()
-if smoke != "Y" and smoke != "N":
-    print("not valid, you don't smoke")
+if smoke == "N":
     smoke = False
 elif smoke == "Y":
     smoke = True
 else:
+    print("invalid input, assuming you don't smoke")  # when you ASSUME, you make an ASS out of U and ME
     smoke = False
 
-HDL = input("what is your HDL? ")
-HDL = float(HDL)
+HDL = float(input("what is your HDL? "))
 
-sys_BP = input("what is your systolic BP? ")
-sys_BP = float(sys_BP)
+sys_BP = float(input("what is your systolic BP? "))
 
 sys_treat = input("has your systolic BP been treated? (y/n) ").upper()
 if sys_treat != "Y" and sys_treat != "N":
@@ -35,21 +31,26 @@ elif sys_treat == "N":
 else:
     sys_treat = True
 
-tot_chol = input("what is your total cholesterol? ")
-tot_chol = float(tot_chol)
+tot_chol = float(input("what is your total cholesterol? "))
+# ##################################
+# # Non Gendered Section ###########
+# ##################################
+# HDL
+if HDL < 40:
+    points += 2
+elif HDL < 50:
+    points += 1
+elif HDL < 60:
+    points += 0
+else:
+    points -= 1
 
+# ================================================================================================= #
+# ========================================= MEN =================================================== #
+# ================================================================================================= #
+# =============================== 'WOMEN'.replace('WO', '') ======================================= #
+# ================================================================================================= #
 if gender == "M":
-
-    # HDL
-    if HDL < 40:
-        points += 2
-    elif HDL < 50:
-        points += 1
-    elif HDL < 60:
-        points += 0
-    else:
-        points -= 1
-    # HDL
 
     # systolic BP
     if sys_treat:
@@ -328,23 +329,11 @@ if gender == "M":
 
 
 # ================================================================================================= #
-# ================================================================================================= #
 # ========================================= WOMEN ================================================= #
 # ================================================================================================= #
+# ======================================= 'WO'+'MEN' ============================================== #
 # ================================================================================================= #
 if gender == "F":
-
-    # HDL
-    if HDL < 40:
-        points += 2
-    elif HDL < 50:
-        points += 1
-    elif HDL < 60:
-        points += 0
-    else:
-        points -= 1
-    # HDL
-
     # systolic BP
     if sys_treat:
         if sys_BP < 120:
