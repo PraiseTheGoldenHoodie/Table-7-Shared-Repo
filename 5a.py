@@ -1,26 +1,30 @@
-# TODO: SYSTOLIC BP IS BULLSHIT FIGURE IT OUT LATER, PUT AT BEGINNING OF MALE AND FEMALE SECTION
+#SYSTOLIC BP IS BULLSHIT FIGURE IT OUT LATER, PUT AT BEGINNING OF MALE AND FEMALE SECTION
+
 
 points = 0
 gender = input("what is your gender? (M/F)").upper()
-if gender != "M" and gender != "F":
+if gender!="M" and gender!="F":
     gender = input("not a valid gender, please enter again (M/F) ").upper()
     if gender != "M" and gender != "F":
-        print("you suck, assuming gender as male")
+        print("you suck")
 
-age = float(input("what is your age? "))
+age = input("what is your age? ")
+age = float(age)
 
 smoke = input("do you smoke? (y/n) ").upper()
-if smoke == "N":
+if smoke !="Y" and smoke !="N":
+    print("not valid, you don't smoke")
     smoke = False
-elif smoke == "Y":
+elif smoke=="Y":
     smoke = True
 else:
-    print("invalid input, assuming you don't smoke")  # when you ASSUME, you make an ASS out of U and ME
     smoke = False
 
-HDL = float(input("what is your HDL? "))
+HDL = input("what is your HDL? ")
+HDL = float(HDL)
 
-sys_BP = float(input("what is your systolic BP? "))
+sys_BP = input("what is your systolic BP? ")
+sys_BP = float(sys_BP)
 
 sys_treat = input("has your systolic BP been treated? (y/n) ").upper()
 if sys_treat != "Y" and sys_treat != "N":
@@ -31,87 +35,82 @@ elif sys_treat == "N":
 else:
     sys_treat = True
 
-tot_chol = float(input("what is your total cholesterol? "))
-# ##################################
-# # Non Gendered Section ###########
-# ##################################
-# HDL
-if HDL < 40:
-    points += 2
-elif HDL < 50:
-    points += 1
-elif HDL < 60:
-    points += 0
-else:
-    points -= 1
+tot_chol = input("what is your total cholesterol? ")
+tot_chol = float(tot_chol)
 
-# ================================================================================================= #
-# ========================================= MEN =================================================== #
-# ================================================================================================= #
-# =============================== 'WOMEN'.replace('WO', '') ======================================= #
-# ================================================================================================= #
-if gender == "M":
+if gender=="M":
 
-    # systolic BP
-    if sys_treat:
-        if sys_BP < 120:
-            points += 0
-        elif sys_BP < 130:
-            points += 1
-        elif sys_BP < 140:
-            points += 2
-        elif sys_BP < 160:
-            points += 2
+    # HDL
+    if HDL < 40:
+        points += 2
+    elif HDL < 50:
+        points += 1
+    elif HDL < 60:
+        points += 0
+    else:
+        points -= 1
+    # HDL
+
+    #systolic BP
+    if sys_treat == True:
+        if sys_BP<120:
+            points+=0
+        elif sys_BP <130:
+            points+=1
+        elif sys_BP<140:
+            points+=2
+        elif sys_BP<160:
+            points+=2
         else:
-            points += 3
-    elif not sys_treat:
-        if sys_BP < 120:
-            points += 0
-        elif sys_BP < 130:
-            points += 0
-        elif sys_BP < 140:
-            points += 1
-        elif sys_BP < 160:
-            points += 1
+            points+=3
+    elif sys_treat == False:
+        if sys_BP<120:
+            points+=0
+        elif sys_BP <130:
+            points+=0
+        elif sys_BP<140:
+            points+=1
+        elif sys_BP<160:
+            points+=1
         else:
-            points += 2
-        # systolic BP end
+            points+=2
+        #systolic BP end
 
-    if age < 35:
-        points -= 9
+    if age<35:
+        points-=9
         # cholesterol
-        if tot_chol < 160:
-            points += 0
-        elif tot_chol < 200:
-            points += 4
-        elif tot_chol < 240:
-            points += 7
-        elif tot_chol < 280:
-            points += 9
+        if tot_chol<160:
+            points+=0
+        elif tot_chol<200:
+            points+=4
+        elif tot_chol<240:
+            points+=7
+        elif tot_chol<280:
+            points+=9
         else:
-            points += 11
-        # cholesterol
+            points+=11
+        #cholesterol
 
-        # smoking
+        #smoking
         if smoke is False:
-            points += 0
+            points+=0
         else:
-            points += 8
-        # smoking
+            points+=8
+        #smoking
 
-    elif age < 40:
-        points -= 4
+    elif age<40:
+        points-=4
         # cholesterol
-        if tot_chol < 160:
-            points += 0
-        elif tot_chol < 200:
-            points += 4
-        elif tot_chol < 240:
-            points += 7
-        elif tot_chol < 280:
-            points += 9
+        if tot_chol<160:
+            points+=0
+        elif tot_chol<200:
+            points+=4
+        elif tot_chol<240:
+            points+=7
+        elif tot_chol<280:
+            points+=9
         else:
-            points += 11
+            points+=11
         # cholesterol
 
             # smoking
@@ -121,8 +120,9 @@ if gender == "M":
                 points += 8
             # smoking
 
-    elif age < 45:
-        points += 0
+
+    elif age<45:
+        points+=0
         # cholesterol
         if tot_chol < 160:
             points += 0
@@ -143,8 +143,8 @@ if gender == "M":
                 points += 5
             # smoking
 
-    elif age < 50:
-        points += 3
+    elif age<50:
+        points+=3
         # cholesterol
         if tot_chol < 160:
             points += 0
@@ -165,8 +165,8 @@ if gender == "M":
                 points += 5
             # smoking
 
-    elif age < 55:
-        points += 6
+    elif age<55:
+        points+=6
         # cholesterol
         if tot_chol < 160:
             points += 0
@@ -187,8 +187,9 @@ if gender == "M":
                 points += 3
             # smoking
 
-    elif age < 60:
-        points += 8
+
+    elif age<60:
+        points+=8
         # cholesterol
         if tot_chol < 160:
             points += 0
@@ -209,8 +210,9 @@ if gender == "M":
                 points += 3
             # smoking
 
-    elif age < 65:
-        points += 10
+
+    elif age<65:
+        points+=10
         # cholesterol
         if tot_chol < 160:
             points += 0
@@ -231,8 +233,9 @@ if gender == "M":
                 points += 1
             # smoking
 
-    elif age < 70:
-        points += 11
+
+    elif age<70:
+        points+=11
         # cholesterol
         if tot_chol < 160:
             points += 0
@@ -253,8 +256,9 @@ if gender == "M":
                 points += 1
             # smoking
 
-    elif age < 75:
-        points += 12
+
+    elif age<75:
+        points+=12
         # cholesterol
         if tot_chol < 160:
             points += 0
@@ -274,9 +278,10 @@ if gender == "M":
             else:
                 points += 1
             # smoking
+
 
     else:
-        points += 13
+        points+=13
         # cholesterol
         if tot_chol < 160:
             points += 0
@@ -299,7 +304,7 @@ if gender == "M":
 
         # point calculation
     if points < 0:
-        print("your ten year risk is less than 1%")
+         print("your ten year risk is less than 1%")
     elif points < 4:
         print("your ten year risk is 1%")
     elif points < 6:
@@ -328,14 +333,26 @@ if gender == "M":
         print("your ten year risk is greater than 30%")
 
 
-# ================================================================================================= #
-# ========================================= WOMEN ================================================= #
-# ================================================================================================= #
-# ======================================= 'WO'+'MEN' ============================================== #
-# ================================================================================================= #
+#=================================================================================================
+#=================================================================================================
+#========================================= WOMEN =================================================
+#=================================================================================================
+#=================================================================================================
 if gender == "F":
+
+    # HDL
+    if HDL < 40:
+        points += 2
+    elif HDL < 50:
+        points += 1
+    elif HDL < 60:
+        points += 0
+    else:
+        points -= 1
+    # HDL
+
     # systolic BP
-    if sys_treat:
+    if sys_treat == True:
         if sys_BP < 120:
             points += 0
         elif sys_BP < 130:
@@ -346,7 +363,7 @@ if gender == "F":
             points += 5
         else:
             points += 6
-    elif not sys_treat:
+    elif sys_treat == False:
         if sys_BP < 120:
             points += 0
         elif sys_BP < 130:
@@ -358,6 +375,7 @@ if gender == "F":
         else:
             points += 4
         # systolic BP end
+
 
     if age < 35:
         points -= 7
@@ -403,6 +421,7 @@ if gender == "F":
                 points += 9
             # smoking
 
+
     elif age < 45:
         points += 0
         # cholesterol
@@ -469,6 +488,7 @@ if gender == "F":
                 points += 4
             # smoking
 
+
     elif age < 60:
         points += 8
         # cholesterol
@@ -490,6 +510,7 @@ if gender == "F":
             else:
                 points += 4
             # smoking
+
 
     elif age < 65:
         points += 10
@@ -513,6 +534,7 @@ if gender == "F":
                 points += 2
             # smoking
 
+
     elif age < 70:
         points += 12
         # cholesterol
@@ -534,6 +556,7 @@ if gender == "F":
             else:
                 points += 2
             # smoking
+
 
     elif age < 75:
         points += 14
@@ -557,6 +580,7 @@ if gender == "F":
                 points += 1
             # smoking
 
+
     else:
         points += 16
         # cholesterol
@@ -579,24 +603,24 @@ if gender == "F":
                 points += 1
             # smoking
 
-    # point calculation
-    if points < 9:
+    #point calculation
+    if points<9:
         print("your ten year risk is less than 1%")
-    elif points < 12:
+    elif points<12:
         print("your ten year risk is 1%")
-    elif points < 14:
+    elif points<14:
         print("your ten year risk is 2%")
-    elif points < 15:
+    elif points<15:
         print("your ten year risk is 3%")
-    elif points < 16:
+    elif points<16:
         print("your ten year risk is 4%")
-    elif points < 17:
+    elif points<17:
         print("your ten year risk is 5%")
-    elif points < 18:
+    elif points<18:
         print("your ten year risk is 6%")
-    elif points < 19:
+    elif points<19:
         print("your ten year risk is 8%")
-    elif points < 20:
+    elif points<20:
         print("your ten year risk is 11%")
     elif points < 21:
         print("your ten year risk is 14%")
