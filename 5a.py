@@ -92,12 +92,8 @@ if gender == "M":
             points += 11
         # cholesterol
 
-        # smoking
-        if smoke is False:
-            points += 0
-        else:
+        if smoke:
             points += 8
-        # smoking
 
     elif age < 40:
         points -= 4
@@ -114,12 +110,8 @@ if gender == "M":
             points += 11
         # cholesterol
 
-            # smoking
-            if smoke is False:
-                points += 0
-            else:
+            if smoke:
                 points += 8
-            # smoking
 
     elif age < 45:
         points += 0
@@ -136,12 +128,8 @@ if gender == "M":
             points += 8
         # cholesterol
 
-            # smoking
-            if smoke is False:
-                points += 0
-            else:
+            if smoke:
                 points += 5
-            # smoking
 
     elif age < 50:
         points += 3
@@ -158,12 +146,8 @@ if gender == "M":
             points += 8
         # cholesterol
 
-            # smoking
-            if smoke is False:
-                points += 0
-            else:
+            if smoke:
                 points += 5
-            # smoking
 
     elif age < 55:
         points += 6
@@ -180,12 +164,8 @@ if gender == "M":
             points += 5
         # cholesterol
 
-            # smoking
-            if smoke is False:
-                points += 0
-            else:
+            if smoke:
                 points += 3
-            # smoking
 
     elif age < 60:
         points += 8
@@ -202,12 +182,8 @@ if gender == "M":
             points += 5
         # cholesterol
 
-            # smoking
-            if smoke is False:
-                points += 0
-            else:
+            if smoke:
                 points += 3
-            # smoking
 
     elif age < 65:
         points += 10
@@ -224,12 +200,8 @@ if gender == "M":
             points += 3
         # cholesterol
 
-            # smoking
-            if smoke is False:
-                points += 0
-            else:
+            if smoke:
                 points += 1
-            # smoking
 
     elif age < 70:
         points += 11
@@ -246,12 +218,8 @@ if gender == "M":
             points += 3
         # cholesterol
 
-            # smoking
-            if smoke is False:
-                points += 0
-            else:
+            if smoke:
                 points += 1
-            # smoking
 
     elif age < 75:
         points += 12
@@ -268,12 +236,8 @@ if gender == "M":
             points += 1
         # cholesterol
 
-            # smoking
-            if smoke is False:
-                points += 0
-            else:
+            if smoke:
                 points += 1
-            # smoking
 
     else:
         points += 13
@@ -290,12 +254,8 @@ if gender == "M":
             points += 1
         # cholesterol
 
-            # smoking
-            if smoke is False:
-                points += 0
-            else:
+            if smoke:
                 points += 1
-            # smoking
 
         # point calculation
     if points < 0:
@@ -374,12 +334,8 @@ if gender == "F":
             points += 13
         # cholesterol
 
-        # smoking
-        if smoke is False:
-            points += 0
-        else:
+        if smoke:
             points += 9
-        # smoking
 
     elif age < 40:
         points -= 3
@@ -396,12 +352,8 @@ if gender == "F":
             points += 13
             # cholesterol
 
-            # smoking
-            if smoke is False:
-                points += 0
-            else:
+            if smoke:
                 points += 9
-            # smoking
 
     elif age < 45:
         points += 0
@@ -418,12 +370,8 @@ if gender == "F":
             points += 10
             # cholesterol
 
-            # smoking
-            if smoke is False:
-                points += 0
-            else:
+            if smoke:
                 points += 7
-            # smoking
 
     elif age < 50:
         points += 3
@@ -440,12 +388,8 @@ if gender == "F":
             points += 10
             # cholesterol
 
-            # smoking
-            if smoke is False:
-                points += 0
-            else:
+            if smoke:
                 points += 7
-            # smoking
 
     elif age < 55:
         points += 6
@@ -462,12 +406,8 @@ if gender == "F":
             points += 7
             # cholesterol
 
-            # smoking
-            if smoke is False:
-                points += 0
-            else:
+            if smoke:
                 points += 4
-            # smoking
 
     elif age < 60:
         points += 8
@@ -484,12 +424,8 @@ if gender == "F":
             points += 7
             # cholesterol
 
-            # smoking
-            if smoke is False:
-                points += 0
-            else:
+            if smoke:
                 points += 4
-            # smoking
 
     elif age < 65:
         points += 10
