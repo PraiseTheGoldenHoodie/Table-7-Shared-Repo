@@ -1,12 +1,21 @@
-#SYSTOLIC BP IS BULLSHIT FIGURE IT OUT LATER, PUT AT BEGINNING OF MALE AND FEMALE SECTION
-
+# By submitting this assignment, I agree to the following:
+# "Aggies do not lie, cheat, or steal, or tolerate those who do"
+# "I have not given or received any unauthorized aid on this assignment"
+#
+# Name: Alexander Bockelman
+#       Jackson Sanders
+#       Patrick Chai
+#       Jose Carrillo
+# Section: 211
+# Assignment: Lab 5a- Activity 2
+# Date: 28 September 2018
 
 points = 0
 gender = input("what is your gender? (M/F)").upper()
 if gender!="M" and gender!="F":
     gender = input("not a valid gender, please enter again (M/F) ").upper()
     if gender != "M" and gender != "F":
-        print("you suck")
+        print("Error. Enter a correct Gender (M/F)")
 
 age = input("what is your age? ")
 age = float(age)
@@ -267,29 +276,29 @@ if gender=="M":
          print("your ten year risk is less than 1%")
     elif points < 4:
         print("your ten year risk is 1%")
-    elif points < 6:
-        print("your ten year risk is 2%")
     elif points < 7:
-        print("your ten year risk is 3%")
+        print("your ten year risk is 2%")
     elif points < 8:
-        print("your ten year risk is 4%")
+        print("your ten year risk is 3%")
     elif points < 9:
-        print("your ten year risk is 5%")
+        print("your ten year risk is 4%")
     elif points < 10:
-        print("your ten year risk is 6%")
+        print("your ten year risk is 5%")
     elif points < 11:
-        print("your ten year risk is 8%")
+        print("your ten year risk is 6%")
     elif points < 12:
-        print("your ten year risk is 10%")
+        print("your ten year risk is 8%")
     elif points < 13:
-        print("your ten year risk is 12%")
+        print("your ten year risk is 10%")
     elif points < 14:
-        print("your ten year risk is 16%")
+        print("your ten year risk is 12%")
     elif points < 15:
-        print("your ten year risk is 20%")
+        print("your ten year risk is 16%")
     elif points < 16:
-        print("your ten year risk is 25%")
+        print("your ten year risk is 20%")
     elif points < 17:
+        print("your ten year risk is 25%")
+    elif points >= 17:
         print("your ten year risk is greater than 30%")
 
 
@@ -540,31 +549,31 @@ if gender == "F":
             # smoking
 
     #point calculation
-    if points<9:
+    if points < 9:
         print("your ten year risk is less than 1%")
-    elif points<12:
+    elif points < 13:
         print("your ten year risk is 1%")
-    elif points<14:
+    elif points < 15:
         print("your ten year risk is 2%")
-    elif points<15:
+    elif points < 16:
         print("your ten year risk is 3%")
-    elif points<16:
+    elif points < 17:
         print("your ten year risk is 4%")
-    elif points<17:
+    elif points < 18:
         print("your ten year risk is 5%")
-    elif points<18:
+    elif points < 19:
         print("your ten year risk is 6%")
-    elif points<19:
+    elif points < 20:
         print("your ten year risk is 8%")
-    elif points<20:
-        print("your ten year risk is 11%")
     elif points < 21:
-        print("your ten year risk is 14%")
+        print("your ten year risk is 11%")
     elif points < 22:
-        print("your ten year risk is 17%")
+        print("your ten year risk is 14%")
     elif points < 23:
-        print("your ten year risk is 22%")
+        print("your ten year risk is 17%")
     elif points < 24:
-        print("your ten year risk is 27%")
+        print("your ten year risk is 22%")
     elif points < 25:
+        print("your ten year risk is 27%")
+    elif points >= 25:
         print("your ten year risk is greater than 30%")
