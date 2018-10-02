@@ -118,8 +118,8 @@ if gender=="M":
             points+=11
         # cholesterol
 
-            if smoke:
-                points += 8
+        if smoke:
+            points += 8
 
 
     elif age<45:
@@ -137,8 +137,8 @@ if gender=="M":
             points += 8
         # cholesterol
 
-            if smoke:
-                points += 5
+        if smoke:
+            points += 5
 
     elif age<50:
         points+=3
@@ -155,8 +155,8 @@ if gender=="M":
             points += 8
         # cholesterol
 
-            if smoke:
-                points += 5
+        if smoke:
+            points += 5
 
     elif age<55:
         points+=6
@@ -173,8 +173,8 @@ if gender=="M":
             points += 5
         # cholesterol
 
-            if smoke:
-                points += 3
+        if smoke:
+            points += 3
 
 
     elif age<60:
@@ -192,8 +192,8 @@ if gender=="M":
             points += 5
         # cholesterol
 
-            if smoke:
-                points += 3
+        if smoke:
+            points += 3
 
 
     elif age<65:
@@ -211,8 +211,8 @@ if gender=="M":
             points += 3
         # cholesterol
 
-            if smoke:
-                points += 1
+        if smoke:
+            points += 1
 
 
     elif age<70:
@@ -230,8 +230,8 @@ if gender=="M":
             points += 3
         # cholesterol
 
-            if smoke:
-                points += 1
+        if smoke:
+            points += 1
 
 
     elif age<75:
@@ -249,8 +249,8 @@ if gender=="M":
             points += 1
         # cholesterol
 
-            if smoke:
-                points += 1
+        if smoke:
+            points += 1
 
 
     else:
@@ -268,8 +268,8 @@ if gender=="M":
             points += 1
         # cholesterol
 
-            if smoke:
-                points += 1
+        if smoke:
+            points += 1
 
         # point calculation
     if points < 0:
@@ -379,8 +379,8 @@ if gender == "F":
             points += 13
             # cholesterol
 
-            if smoke:
-                points += 9
+        if smoke:
+            points += 9
 
 
     elif age < 45:
@@ -398,8 +398,8 @@ if gender == "F":
             points += 10
             # cholesterol
 
-            if smoke:
-                points += 7
+        if smoke:
+            points += 7
 
     elif age < 50:
         points += 3
@@ -416,8 +416,8 @@ if gender == "F":
             points += 10
             # cholesterol
 
-            if smoke:
-                points += 7
+        if smoke:
+            points += 7
 
     elif age < 55:
         points += 6
@@ -434,8 +434,8 @@ if gender == "F":
             points += 7
             # cholesterol
 
-            if smoke:
-                points += 4
+        if smoke:
+            points += 4
 
 
     elif age < 60:
@@ -453,8 +453,8 @@ if gender == "F":
             points += 7
             # cholesterol
 
-            if smoke:
-                points += 4
+        if smoke:
+            points += 4
 
 
     elif age < 65:
@@ -473,10 +473,9 @@ if gender == "F":
             # cholesterol
 
             # smoking
-            if smoke is False:
-                points += 0
-            else:
-                points += 2
+        if smoke:
+            points += 2
+
             # smoking
 
 
@@ -496,10 +495,8 @@ if gender == "F":
             # cholesterol
 
             # smoking
-            if smoke is False:
-                points += 0
-            else:
-                points += 2
+        if smoke:
+            points += 2
             # smoking
 
 
@@ -519,10 +516,8 @@ if gender == "F":
             # cholesterol
 
             # smoking
-            if smoke is False:
-                points += 0
-            else:
-                points += 1
+        if smoke:
+            points +=1
             # smoking
 
 
@@ -542,10 +537,8 @@ if gender == "F":
             # cholesterol
 
             # smoking
-            if smoke is False:
-                points += 0
-            else:
-                points += 1
+        if smoke:
+            points += 1
             # smoking
 
     #point calculation
