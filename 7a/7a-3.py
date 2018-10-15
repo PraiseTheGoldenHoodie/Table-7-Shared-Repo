@@ -19,7 +19,7 @@ board = [["R","N","B","Q","K","B","N","R"],
          [".",".",".",".",".",".",'.','.'],
          ['p','p','p','p','p','p','p','p'],
          ['r','n','b','q','k','b','n','r']]
-while True:  # current_row<=8 and final_row<=8 and current_column<=8 and final_column<=8:
+while True: 
     # display board
     for row in board:
         for val in row:
@@ -33,23 +33,11 @@ while True:  # current_row<=8 and final_row<=8 and current_column<=8 and final_c
     final_column = int(input("what column are you moving to? "))
     index = 0
     # check move is valid / make move
-    if board[current_row][current_column] == ".":
+    if board[current_row][current_column] == ".":  # Checks we are moving character
         print("invalid move")
-        break
-    if board[final_row][final_column] == ".":
-        pass  # TODO
-    else:
-        if board[final_row][final_column].isupper() != board[current_row][current_column].isupper() and board[final_row][final_column] == ".":
-            store_row = final_row
-            store_column = final_column
-            final_row = current_row
-            final_column = current_column
-            current_row = store_row
-        
-        elif board[final_row][final_column].isupper() != board[current_row][current_column].isupper() and board[final_row][final_column] != ".":
-            board[final_row][final_column] = board[current_row][current_column]
-            board[current_row][current_column] = '.'
-            
-        else:
-            print("invalid move")
-            break
+    # Moving into empty, or moving onto enemy
+    elif board[final_row][final_column] == "." or board[final_row][final_column].isupper() != board[current_row][current_column].isupper():
+        board[final_row][final_column] = board[current_row][current_column]  # final position set to moving piece
+        board[current_row][current_column] = '.'  # set moving piece's former position to empty
+    else:  # moving onto friendly piece
+        print("invalid move")
