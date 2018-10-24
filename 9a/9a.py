@@ -9,3 +9,11 @@
 # Section:		211
 # Assignment:	9a
 # Date:		24 10 2018
+
+input_path = "input.txt"
+output_path = "output.txt"
+
+with open(input_path, 'r') as fileName:
+    english_lines = fileName.readlines()
+for line in english_lines:
+    print(line.split())

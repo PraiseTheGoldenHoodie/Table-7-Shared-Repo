@@ -20,7 +20,7 @@ open(path, "ab")
 #etc.
 
 # more common, safer, better way:
-with fileName as open(...):
+with open(...) as fileName:
     doStuffToFile
 
 # the other manual, unsafe way:
