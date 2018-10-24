@@ -6,6 +6,7 @@
 #       Jackson Sanders
 #       Patrick Chai
 #       Jose Carrillo
+#
 # Section: 211
 # Assignment: Lab 7a- Activity 2
 # Date: October 9 2018
@@ -47,7 +48,7 @@ else:
 winners = []
 losers = []
 
-# Add names who made cutoff to 'winners' those who didn't to 'losers'
+# Add names who made cutoff to 'winners', those who didn't go to 'losers'
 for j in range(0,len(names)):
     if qscores_unsorted[j] <= median:  # We check against qscores_unsorted because it is parallel to names list
         winners.append(names[j])
