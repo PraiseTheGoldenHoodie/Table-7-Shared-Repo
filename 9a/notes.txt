@@ -1,0 +1,35 @@
+########################################
+### Some notes for today's lecture:  ###
+########################################
+
+# to create a stream object:
+open(path, mode)
+# path
+# example of relative path (use this if file in same folder as python file):
+open(r"myFile.txt")
+#example of absolute path (use this if file is elsewhere):
+open(r"C:\Users\you\Projects\PythonProjects\Table-7-Shared-Repo\7a\myOtherFile.txt")
+# mode
+open(path, "r")  # read only
+open(path, "w")  # write only
+open(path, "a")  # append
+open(path, "r+")  # read-write
+# we can add 'b' to specify binary, e.g.
+open(path, "rb")
+open(path, "ab") 
+#etc.
+
+# more common, safer, better way:
+with fileName as open(...):
+    doStuffToFile
+
+# the other manual, unsafe way:
+fileName = open(...)  # creates a stream object
+doStuffToFile
+fileName.close()  # always close a file whenever you aren't reading it.
+
+#stream methods
+stream.readline() # returns iterable of strings
+stream.read() # returns single string
+stream.readlines() # returns list of strings
+list(stream) # same as before
