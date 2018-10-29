@@ -14,21 +14,28 @@ input_path = "input.txt"
 output_path = "output.txt"
 
 vowels = ['a', 'e', 'i', 'o', 'u', 'y']                                                                                 # Assigns values
+outputlines = []
+# Reads in the file
 with open(input_path, 'r') as fileName:
     english_lines = fileName.readlines()
+
+# Converting to pig-latin
 for line in english_lines:
     #print(line.split())
+    next_out_line = ""
     for word in line.split():
         first_letter = word[0:1]                                                                                            # Assigns the first character from the word string to variable
         is_vowel = False                                                                                                        # Pretty much a boolean trigger to let you know it's not a vowel
         for i in vowels :
             if first_letter == i :                                                                                          # If the first letter is a vowel
-                print(word+'yay', end=' ')
+                next_out_line += word+'yay '
                 is_vowel = True                                                                                             # Redefines the boolean and stops the program
                 break
 
-        while not is_vowel :                                                                                                # Starts with consonant
-            print(word[1:]+first_letter+"ay", end=' ')
-            break
-    print()
+        if not is_vowel :                                                                                                # Starts with consonant
+            next_out_line += word[1:]+first_letter+"ay "
+    outputlines.append(next_out_line +"\n")
 
+# output the file
+with open(output_path, 'w') as fileName:
+    fileName.writelines(outputlines)
