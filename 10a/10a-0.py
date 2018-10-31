@@ -9,7 +9,7 @@
 #
 # Section: 211
 # Assignment: Lab 10a- Activity 0
-# Date: DATE DATE 2018
+# Date: 31 10 2018
 try:
     import numpy
     import matplotlib
@@ -17,3 +17,4 @@ except ImportError:
     print("Packages cannot be imported!!!! Fix this!!!!")
 else:
     print("Numpy and Matplotlib packages are installed.")
+
