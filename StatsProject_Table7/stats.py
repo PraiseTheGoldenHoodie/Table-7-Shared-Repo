@@ -25,59 +25,70 @@ functions:
 """
 print("stats imported")
 def mean(list):
-    """
-    TODO: this docstring
-    """
-    raise NotImplementedError
-    return float
+    total = 0
+    for i in list :
+        total += i
+    avg = total / len(list)
+    return avg
+
 def median(list):
-    """
-    TODO: this docstring
-    """
-    raise NotImplementedError
-    return float
+    min = list[0]
+    for i in list :
+        if list[i] < min :
+            min = list[i]
+    middle = round(len(list) / 2)
+    median = list[middle]
+    return median
+
 def mode(list):
     """
     TODO: this docstring
     """
     raise NotImplementedError
     return float
-def varience(list):
+
+def variance(list):
     """
     TODO: this docstring
     """
     raise NotImplementedError
     return float
+
 def standard_dev(list):
     """
     TODO: this docstring
     """
     raise NotImplementedError
     return float
+
 def min(list):
     """
     TODO: this docstring
     """
     raise NotImplementedError
     return float
+
 def max(list):
     """
     TODO: this docstring
     """
     raise NotImplementedError
     return float
+
 def range(list):
     """
     TODO: this docstring
     """
     raise NotImplementedError
     return float
+
 def count(list):
     """
     TODO: this docstring
     """
     raise NotImplementedError
     return int
+
 def sum(list):
     """
     TODO: this docstring
