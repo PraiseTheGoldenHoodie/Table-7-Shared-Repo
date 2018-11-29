@@ -23,29 +23,34 @@ functions:
     count
     sum
 """
+
 print("stats imported")
 
-def mean(list):
+def mean(alist):
     """
-    :param list: list of data that'll be used to find mean
+    :param alist: alist of data that'll be used to find mean
     :return: mean value as a float
     """
     total = 0
-    for i in list :
+    for i in alist :
         total += i
-    avg = total / count(list)
+        # Running sum
+    avg = total / count(alist)
+    # Sum divided by the amount of characters in the alist to find the mean
     return avg
 
-def median(list):
+def median(alist):
     """
-    :param list: list of data that'll be used to find median
+    :param alist: list of data that'll be used to find median
     :return: median value as an int
     """
-    if count(list) % 2 != 0 :
-        middle = floor(count(list) / 2)
+    if count(alist) % 2 != 0 :
+    # Determines if the length of the list is odd. If it is, then it returns the value in the direct middle of the list
+        middle = floor(count(alist) / 2)
         return middle
     else :
-        upper = count(list) / 2
+    # This means the length of the list is even and it takes the average of the two central numbers of the list
+        upper = count(alist) / 2
         lower = upper - 1
         middle = (upper + lower) / 2
         return middle
@@ -72,85 +77,91 @@ def mode(alist):
         mode_val = int(mode_val[0])
     return mode_val
 
-def variance(list):
+def variance(alist):
     """
-    :param list: list of data that'll be used to find the variance
+    :param alist: list of data that'll be used to find the variance
     :return: variance as a float
     """
     summ = 0
-    for val in list:
-        summ += ((float(val) - mean(list)) ** 2)
-    var_val = summ / len(list)
+    for val in alist:
+        summ += ((float(val) - mean(alist)) ** 2)
+    var_val = summ / len(alist)
+    # This is the variance formula. Riveting.
     return  var_val
 
-def standard_dev(list):
+def standard_dev(alist):
     """
-    :param list: list of data that'll be used to find the standard deviation
+    :param alist: list of data that'll be used to find the standard deviation
     :return: standard deviation as a float value
     """
     from math import sqrt
-    std_dev = sqrt(variance(list))
+    std_dev = sqrt(variance(alist))
+    # It's just the square root of the variance
     return std_dev
 
-def min(list):
+def min(alist):
     """
-    :param list: list of data that'll be used to find the minimum value of the list
+    :param alist: list of data that'll be used to find the minimum value of the list
     :return: minimum value in the form of an integer
     """
     min_val = 9*(10**1000)
-    for i in list:
-        if i < list[list.index(i) - 1] and i < min_val:
+    # Big ol number to start as max so it'll run, then anything smaller will turn into min
+    for i in alist:
+        if i < alist[alist.index(i) - 1] and i < min_val:
             min_val = i
     return min_val
 
-def max(list):
+def max(alist):
     """
-        :param list: list of data that'll be used to find the standard deviation
+        :param alist: list of data that'll be used to find the standard deviation
         :return: maximum value in the form of an integer
     """
     max_val = 0
-    for i in list:
-        if i > list[list.index(i) - 1] and i > max_val:
+    # Same thing as the min func except this time it finds the biggest number
+    for i in alist:
+        if i > alist[alist.index(i) - 1] and i > max_val:
             max_val = i
     return max_val
 
-def range(list):
+def range(alist):
     """
-    :param list: list of data that'll be used to find the range
+    :param alist: list of data that'll be used to find the range
     :return: range value in the form of a float
     """
-    change = max(list) - min(list)
+    change = max(alist) - min(alist)
+    # It is what it is
     return change
 
-def count(list):
+def count(alist):
     """
-    :param list: list of data that'll be used to find the amount characters in the list
+    :param alist: list of data that'll be used to find the amount characters in the list
     :return: integer value indicating the number of characters
     """
     counter = 0
-    for i in list :
+    for i in alist :
         counter += 1
+    # Simple way of finding how many characters are in the list without an inbuilt function
     return counter
 
-def sum(list):
+def sum(alist):
     """
-    :param list: list of data that'll be used to find the sum of all the numbers located in the list
+    :param alist: list of data that'll be used to find the sum of all the numbers located in the list
     :return: float value of the sum of all the list's values
     """
     summ = 0
-    for i in list :
+    for i in alist :
         summ += i
+    # Adds each term in the list to a sum variable as the loop iterates through the list, finding the summation
     return summ
 
-list = [21.3,7,89,1,6,4,8,123,6,8,1,4,68,8,6,8,8,8,1,8,7,4,9,21]
-
-print(mean(list))
-print(median(list))
-print(mode(list))
-print(variance(list))
-print(standard_dev(list))
-print(min(list))
-print(max(list))
-print(range(list))
-print(count(list))
-print(sum(list))
+# Available to test a list if the user so desires
+# print(mean(list))
+# print(median(list))
+# print(mode(list))
+# print(variance(list))
+# print(standard_dev(list))
+# print(min(list))
+# print(max(list))
+# print(range(list))
+# print(count(list))
+# print(sum(list))
