@@ -26,6 +26,10 @@ functions:
 print("stats imported")
 
 def mean(list):
+    """
+    :param list: list of data that'll be used to find mean
+    :return: mean value as a float
+    """
     total = 0
     for i in list :
         total += i
@@ -33,6 +37,10 @@ def mean(list):
     return avg
 
 def median(list):
+    """
+    :param list: list of data that'll be used to find median
+    :return: median value as an int
+    """
     min = list[0]
     for i in list :
         if list[i] < min :
@@ -44,7 +52,6 @@ def median(list):
 
 def mode(alist):
     """
-
     :param alist: list of data that will be used to find mode
     :return: mode_val as an integer if more than one mode returns as tuple
     """
@@ -65,20 +72,31 @@ def mode(alist):
         mode_val = int(mode_val[0])
     return mode_val
 
-
 def variance(list):
+    """
+    :param list: list of data that'll be used to find the variance
+    :return: variance as a float
+    """
     summ = 0
     for val in list:
-        summ = summ + ((float(list[val]) - mean(list)) ** 2)
+        summ += ((float(val) - mean(list)) ** 2)
     var_val = summ / len(list)
     return  var_val
 
 def standard_dev(list):
+    """
+    :param list: list of data that'll be used to find the standard deviation
+    :return: standard deviation as a float value
+    """
     from math import sqrt
     std_dev = sqrt(variance(list))
     return std_dev
 
 def min(list):
+    """
+    :param list: list of data that'll be used to find the minimum value of the list
+    :return: minimum value in the form of an integer
+    """
     min_val = 9*(10**1000)
     for i in list:
         if i < list[list.index(i) - 1] and i < min_val:
@@ -86,6 +104,10 @@ def min(list):
     return min_val
 
 def max(list):
+    """
+        :param list: list of data that'll be used to find the standard deviation
+        :return: maximum value in the form of an integer
+    """
     max_val = 0
     for i in list:
         if i > list[list.index(i) - 1] and i > max_val:
@@ -93,16 +115,28 @@ def max(list):
     return max_val
 
 def range(list):
+    """
+    :param list: list of data that'll be used to find the range
+    :return: range value in the form of a float
+    """
     change = max(list) - min(list)
     return change
 
 def count(list):
+    """
+    :param list: list of data that'll be used to find the amount characters in the list
+    :return: integer value indicating the number of characters
+    """
     counter = 0
     for i in list :
         counter += 1
     return counter
 
 def sum(list):
+    """
+    :param list: list of data that'll be used to find the sum of all the numbers located in the list
+    :return: float value of the sum of all the list's values
+    """
     summ = 0
     for i in list :
         summ += i
