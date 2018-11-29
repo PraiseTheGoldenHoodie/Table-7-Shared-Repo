@@ -24,11 +24,12 @@ functions:
     sum
 """
 print("stats imported")
+
 def mean(list):
     total = 0
     for i in list :
         total += i
-    avg = total / len(list)
+    avg = total / count(list)
     return avg
 
 def median(list):
@@ -36,7 +37,7 @@ def median(list):
     for i in list :
         if list[i] < min :
             min = list[i]
-    middle = round(len(list) / 2)
+    middle = round(count(list) / 2)
     median = list[middle]
     return median
 
@@ -55,11 +56,9 @@ def variance(list):
     return  var_val
 
 def standard_dev(list):
-    """
-    TODO: this docstring
-    """
-    raise NotImplementedError
-    return float
+    from math import sqrt
+    std_dev = sqrt(variance(list))
+    return std_dev
 
 def min(list):
     min_val = 9*(10**1000)
@@ -80,15 +79,13 @@ def range(list):
     return change
 
 def count(list):
-    """
-    TODO: this docstring
-    """
-    raise NotImplementedError
-    return int
+    counter = 0
+    for i in list :
+        counter += 1
+    return counter
 
 def sum(list):
-    """
-    TODO: this docstring
-    """
-    raise NotImplementedError
-    return int
+    summ = 0
+    for i in list :
+        summ += i
+    return summ
