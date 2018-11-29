@@ -5,6 +5,7 @@
 *.code-workspace
 git_ignored_files/*
 !git_ignored_files/readme.txt
+*.jpeg
 
 # Auto-generated list
 

@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
-x = [1,10,100]
-y = [1,10,100]
+#x = [1,10,100]
+#y = [1,10,100]
 
 def histogram(list):
     ''' function histogram takes in a list, returns a histogram of the values in the list, plot has title and axes. '''
@@ -73,5 +73,5 @@ def subplots(xlist,ylist):
     plt.ylabel('log y data values')
     plt.show()
 
-subplots(x,y)
-plt.savefig('dataplot.jpg')
+#subplots(x,y)
+#plt.savefig('dataplot.jpg')
