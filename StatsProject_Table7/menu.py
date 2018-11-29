@@ -56,8 +56,11 @@ def pause():
     """literally input("[ENTER to continue]"), but just in case we want to change this message"""
     input("[ENTER to continue]")
 
-
-
+def stats_strings(x, y=None):
+    output = ""
+    funcs = ["mean", "median", "mode", "variance", "standard_dev", "min", "max", "range", "count"]
+    for func in funcs:
+        print(exec("stats."+func+"(x)")) # stats.mean(x)
 ##############################################
 ############# BEGIN EXECUTION ################
 ##############################################
@@ -87,16 +90,19 @@ while True:
         data_y = [9, 6, 1, 10]
         include_y = True
     if c1 == 2:  # ADD
+        #TODO:
         pass
     if c1 == 3:  # USERNAME
         username = input("Enter new username: ")
         print("username set to",username)
         pause()
     if c1 == 4:  # STATS
+        stats_strings(data_x)
         pass
     if c1 == 5:  # GRAPH
         print("You are about to plot your data, please enter the corresponding keyword to choose which type of display: ")
         c2 = enumerate_options("What type of plot would you like?", ["Histogram","Linear","Semi_logx","Semi_logy","LogLog","Subplots"])
+        # TODO: all the other options, such as when include_y is false
         if c2 == 0:    # HISTOGRAM
             if include_y:
                 c3 = enumerate_options("Choose dataset to plot:", ["x","y"])
@@ -109,13 +115,13 @@ while True:
         if c2 == 1:
             graph.linear(data_x, data_y)
         if c2 == 2: 
-            graph.semi_logx()
+            graph.semi_logx(data_x, data_y)
         if c2 == 3:
-            graph.semi_logy()
+            graph.semi_logy(data_x, data_y)
         if c2 == 4: 
-            graph.loglog()
+            graph.loglog(data_x, data_y)
         if c2 == 5:
-            graph.subplot()
+            graph.subplot(data_x, data_y)
 
     if c1 == 6: # QUIT # FIXME
         if unsaved_changes:
