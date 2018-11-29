@@ -14,6 +14,7 @@ TODO: this docstring
 print("menu imported")
 import graph
 import stats
+import datetime
 
 def prompt_yes_no(question):
     """
@@ -23,7 +24,7 @@ def prompt_yes_no(question):
     question (string) - usually ends with question mark. Printed, followed by '[y/n]: '
     """
     while True:
-        choice = input( question + " [y/n]: ").strip().lower()
+        choice = input( question + " [y/n]\n> ").strip().lower()
         if choice == "y":
             return True
         elif choice =="n":
@@ -54,10 +55,11 @@ def enumerate_options(prompt, choices):
     
 def pause():
     """literally input("[ENTER to continue]"), but just in case we want to change this message"""
-    input("[ENTER to continue]")
+    input("[ENTER to continue]\n> ")
 
 def stats_strings(x, y=None):
-    r""" takes one or two lists of data and returns string (containing \n characters) of all stats functions and their values.
+    r"""
+    takes one or two lists of data and returns string (containing \n characters) of all stats functions and their values.
     prints y data as second column to the right of x column.
     """
     output = ""
@@ -102,6 +104,12 @@ while True:
         "Quit {}".format("(You have unsaved changes)" if unsaved_changes else "")])
     if c1 == 0:  # SAVE
         print("Do save function here")
+        # TODO: FIXME: finish this
+        output_name = input('what is the desired output file name? ')
+        header = 'File name:',file_name+'.'+file_type,'Output file name:',output_name+'.txt','Username:',username,'Date and time:',datetime.datetime.now()
+        print(stats_string(x,y)) # prints all stats, only y if it exists
+        for i in range(len(data_x)):
+            print(data_x[i],data_y[i], sep=',')
         unsaved_changes = False
         pause()
     if c1 == 1:   # LOAD
@@ -112,7 +120,7 @@ while True:
         #TODO:
         pass
     if c1 == 3:  # USERNAME
-        username = input("Enter new username: ")
+        username = input("Enter new username:\n> ")
         print("username set to",username)
         pause()
     if c1 == 4:  # STATS
