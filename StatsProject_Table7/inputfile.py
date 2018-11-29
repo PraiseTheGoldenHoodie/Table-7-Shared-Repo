@@ -1,13 +1,13 @@
 
-file_name = input('what is the file name? ')
-file_type = input('what is the file type? (csv, tsv, or txt only) ').lower()
+file_name = input('what is the file path?\n> ')
+file_type = input('what is the file type? (csv, tsv, or txt only)\n> ').lower()
 file_type = file_type.strip('.')
 
 # takes in file type, returns file type indicator
 def csv_tsv(file_type):
-    if file_type == 'csv'.lower():
-        return','
-    elif file_type == 'tsv'.lower():
+    if file_type == 'csv':
+        return ','
+    elif file_type == 'tsv':
         return '\t'
     else:
         return 'stop'
