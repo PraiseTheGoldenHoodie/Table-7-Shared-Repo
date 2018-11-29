@@ -14,8 +14,8 @@ def csv_tsv(file_type):
 
 # below is code for text file, appends each line (number) to a list after converting to float
 if file_type == 'txt'.lower():
-     with open(file_name+'.txt','r') as file:
-        data = file
+     with open(file_name+'.txt','r') as infile:
+        data = infile
         data_x = []
         data_y = []
         # loop through data, check for headers, then strip unnecessary characters from numbers, then convert to floats and into lists
@@ -37,8 +37,8 @@ if file_type == 'txt'.lower():
 
 # below is code for csv/tsv file, appends each line(number) to a list after converting to float
 elif csv_tsv(file_type) != 'stop':
-    with open(file_name+'.'+file_type,'r') as file:
-        data = file
+    with open(file_name+'.'+file_type,'r') as infile:
+        data = infile
         data_x = []
         data_y = []
         # strips unnecessary characters from files, then convert to float, then append to list
