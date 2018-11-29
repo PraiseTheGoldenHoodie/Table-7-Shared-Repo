@@ -56,8 +56,6 @@ def mode(alist):
     mode_val = tuple(mode_val)
     return mode_val
 
-print(mode([2, 4, 5, 2, 5, 2, 3, 5, 2, 1]))
-
 def variance(list):
     summ = 0
     for val in list:
