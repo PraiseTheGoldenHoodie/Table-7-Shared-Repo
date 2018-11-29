@@ -15,7 +15,7 @@ functions:
     mean
     median
     mode
-    varience
+    variance
     standard_dev
     min
     max
@@ -41,14 +41,14 @@ def median(list):
     :param list: list of data that'll be used to find median
     :return: median value as an int
     """
-    min = list[0]
-    for i in list :
-        if list[i] < min :
-            min = list[i]
-    middle = round(count(list) / 2)
-    median = list[middle]
-    return median
-
+    if count(list) % 2 != 0 :
+        middle = floor(count(list) / 2)
+        return middle
+    else :
+        upper = count(list) / 2
+        lower = upper - 1
+        middle = (upper + lower) / 2
+        return middle
 
 def mode(alist):
     """
@@ -141,3 +141,16 @@ def sum(list):
     for i in list :
         summ += i
     return summ
+
+list = [21.3,7,89,1,6,4,8,123,6,8,1,4,68,8,6,8,8,8,1,8,7,4,9,21]
+
+print(mean(list))
+print(median(list))
+print(mode(list))
+print(variance(list))
+print(standard_dev(list))
+print(min(list))
+print(max(list))
+print(range(list))
+print(count(list))
+print(sum(list))
