@@ -41,7 +41,13 @@ def median(list):
     median = list[middle]
     return median
 
+
 def mode(alist):
+    """
+
+    :param alist: list of data that will be used to find mode
+    :return: mode_val as an integer if more than one mode returns as tuple
+    """
     modes = {}
     mode_val = []
     for i in alist:
@@ -53,8 +59,12 @@ def mode(alist):
     for key, val in modes.items():
         if freq == val:
             mode_val.append(key)
-    mode_val = tuple(mode_val)
+    if len(mode_val) > 1:
+        mode_val = tuple(mode_val)
+    else:
+        mode_val = int(mode_val[0])
     return mode_val
+
 
 def variance(list):
     summ = 0
