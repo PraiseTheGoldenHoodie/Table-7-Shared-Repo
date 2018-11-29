@@ -48,11 +48,11 @@ def mode(list):
     return float
 
 def variance(list):
-    """
-    TODO: this docstring
-    """
-    raise NotImplementedError
-    return float
+    summ = 0
+    for val in list:
+        summ = summ + ((float(list[val]) - mean(list)) ** 2)
+    var_val = summ / len(list)
+    return  var_val
 
 def standard_dev(list):
     """
@@ -62,25 +62,22 @@ def standard_dev(list):
     return float
 
 def min(list):
-    """
-    TODO: this docstring
-    """
-    raise NotImplementedError
-    return float
+    min_val = 9*(10**1000)
+    for i in list:
+        if i < list[list.index(i) - 1] and i < min_val:
+            min_val = i
+    return min_val
 
 def max(list):
-    """
-    TODO: this docstring
-    """
-    raise NotImplementedError
-    return float
+    max_val = 0
+    for i in list:
+        if i > list[list.index(i) - 1] and i > max_val:
+            max_val = i
+    return max_val
 
 def range(list):
-    """
-    TODO: this docstring
-    """
-    raise NotImplementedError
-    return float
+    change = max(list) - min(list)
+    return change
 
 def count(list):
     """
