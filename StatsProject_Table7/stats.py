@@ -41,12 +41,20 @@ def median(list):
     median = list[middle]
     return median
 
-def mode(list):
-    """
-    TODO: this docstring
-    """
-    raise NotImplementedError
-    return float
+def mode(alist):
+    modes = {}
+    mode_val = []
+    for i in alist:
+        if i in modes:
+            modes[i] += 1
+        else:
+            modes[i] = 1
+    freq = max(modes.values())
+    for key, val in modes.items():
+        if freq == val:
+            mode_val.append(key)
+    mode_val = tuple(mode_val)
+    return mode_val
 
 def variance(list):
     summ = 0
