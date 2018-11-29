@@ -44,7 +44,7 @@ def enumerate_options(prompt, choices):
             i += 1
             print("{:2}) {}".format(i, choice))
         try:
-            user_choice = input().strip()
+            user_choice = input("> ").strip()
             user_choice = int(user_choice)
             assert user_choice < len(choices) + 1
             return user_choice - 1  # -1 to convert to zero index
@@ -57,16 +57,35 @@ def pause():
     input("[ENTER to continue]")
 
 def stats_strings(x, y=None):
+    r""" takes one or two lists of data and returns string (containing \n characters) of all stats functions and their values.
+    prints y data as second column to the right of x column.
+    """
     output = ""
-    funcs = ["mean", "median", "mode", "variance", "standard_dev", "min", "max", "range", "count"]
+    funcs = ["mean", "median", "mode", "variance", "standard_dev", "min", "max", "range"]
+    right_width = 6  # number of characters for value on right side of equals sign
+    left_width = 12
+    dec_prec = 2  # number of decimal places
+    column_padding = 8*" "  # between x and y columns
+    # the following lines evaluate each func (e.g. "mean" becomes stats.mean(x)), with the func's name and result put into formatted string.
     for func in funcs:
-        print(exec("stats."+func+"(x)")) # stats.mean(x)
-##############################################
+        output += "{:{lw}} = {:>{rw}.{dp}f}".format(func, eval("stats."+func+"(x)"), lw=left_width, rw=right_width, dp=dec_prec)
+        if y != None:
+            output += column_padding + "{:{lw}} = {:>{rw}.{dp}f}".format(func, eval("stats."+func+"(y)"), lw=left_width, rw=right_width, dp=dec_prec)
+        output += "\n"
+    # count, the only integer, needs ever so slightly differnt format string.
+    output += "{:{lw}} = {:>{rw}d}".format("count", stats.count(x), lw=left_width, rw=right_width)
+    if y != None:
+        output += column_padding + "{:{lw}} = {:>{rw}d}".format("count", stats.count(x), lw=left_width, rw=right_width)
+    output += "\n"
+    return output
+
+
+##############################################"mode", 
 ############# BEGIN EXECUTION ################
 ##############################################
 
 username = "user"  #TODO: extract username from file
-unsaved_changes = True
+unsaved_changes = False
 
 data_x = None
 data_y = None
@@ -97,7 +116,8 @@ while True:
         print("username set to",username)
         pause()
     if c1 == 4:  # STATS
-        stats_strings(data_x)
+        print(stats_strings(data_x))
+        print(stats_strings(data_x, data_y))
         pass
     if c1 == 5:  # GRAPH
         print("You are about to plot your data, please enter the corresponding keyword to choose which type of display: ")

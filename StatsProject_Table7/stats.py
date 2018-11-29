@@ -46,7 +46,7 @@ def median(alist):
     """
     if count(alist) % 2 != 0 :
     # Determines if the length of the list is odd. If it is, then it returns the value in the direct middle of the list
-        middle = floor(count(alist) / 2)
+        middle = count(alist) // 2
         return middle
     else :
     # This means the length of the list is even and it takes the average of the two central numbers of the list
@@ -55,7 +55,7 @@ def median(alist):
         middle = (upper + lower) / 2
         return middle
 
-def mode(alist):
+def mode(alist):  # FIXME: doesn't work when I've tried it
     """
     :param alist: list of data that will be used to find mode
     :return: mode_val as an integer if more than one mode returns as tuple
@@ -67,7 +67,7 @@ def mode(alist):
             modes[i] += 1
         else:
             modes[i] = 1
-    freq = max(modes.values())
+    freq = max(list(modes.values()))
     for key, val in modes.items():
         if freq == val:
             mode_val.append(key)
