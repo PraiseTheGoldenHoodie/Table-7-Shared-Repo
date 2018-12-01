@@ -88,6 +88,18 @@ def stats_strings(x, y=None):
     output += "\n"
     return output
 
+def num_columns():
+    """returns how many columns of data this set has, 0 if no data yet."""
+    if data_x == None:
+        if data_y == None:
+            return 0
+        else:
+            raise ValueError("X values are missing but y values are initialized!")
+    else:
+        if data_y == None:
+            return 1
+        else:
+            return 2
 ################## Menu Functions #####################
 # These menu functions replace the ugly, hard-to-read, hard-to-maintain if-elif-elif-...-else statements
 # in controlling navigation between question prompts. They take no parameters, return None, and
@@ -110,18 +122,17 @@ def save_menu():
     # TODO: FIXME: finish this
     output_name = input('what is the desired output file name? ')
     header = 'File name:',file_name+'.'+file_type,'Output file name:',output_name+'.txt','Username:',username,'Date and time:',datetime.datetime.now()
-    print(stats_strings(data_x,data_y if single_column else None)) # prints all stats, only y if it exists
+    print(stats_strings(data_x, data_y if num_columns() == 1 else None))
     for i in range(len(data_x)):
         print(data_x[i],data_y[i], sep=',')
     unsaved_changes = False
     pause()
 
 def load_menu():
-    global data_x, data_y, single_column, unsaved_changes
+    global data_x, data_y, unsaved_changes
     ## Manually setting data temporarily, just so I have something to test with
     data_x = [1,2,5,6]  # temporary
     data_y = [9, 6, 1, 10] # temporary
-    single_column = True # temporary
     unsaved_changes = True # temporary
     # TODO: actually load data
     # TODO: prompt user whether or override all existing data with data loaded in, or append new data (and if so, make sure the number of columns match)
@@ -130,8 +141,9 @@ def load_menu():
 
 def add_data_menu():
     """user enters data manually"""
-    global single_column, data_x, data_y, unsaved_changes
-    if single_column == None:  # no data yet
+    global data_x, data_y, unsaved_changes
+    single_column = num_columns() == 1
+    if num_columns() == 0:  # no data yet
         single_column = choose_submenu("Enter one or two collums?", [("One",True),("Two",False),("Back",None)])
         if single_column == None:  # user selected cancel
             return
@@ -152,40 +164,42 @@ def username_menu():
 def stats_menu():
     """Prints statistic data to console, option for user to save data 
     to file immediately (same save feature on main menu)"""
-    global data_x, data_y, single_column
+    global data_x, data_y
     if data_x == None:
         return
-    if single_column:
+    if num_columns() == 1:
         print(stats_strings(data_x, data_y))
-    else:
+    elif num_columns() == 2:
         print(stats_strings(data_x))
+    else:
+        print("No data to analyze! Choose 'Load data' or 'Add data'.")
+        return
     # TODO: asks user if they want to save, and does so if so.
 
 def graph_menu():
     """
     Asks user what graph they want, shows it, save as jpeg.
     """
-    if data_x == None:
+    if num_columns() == 0:
         print("No data to graph! Choose 'Load data' or 'Add data'.")
         return
-    graph_func = choose_submenu("What type of graph would you like?", [("Histogram", graph.histogram),
-    ("Linear", graph.linear),("Semi-Log(x)", graph.semi_logx),("Semi-Log(y)", graph.semi_logy),
-    ("Log-Log", graph.loglog),("Subplots", graph.subplots)])
-    if graph_func == graph.histogram:
-        if not single_column:
-            graph_func(data_x)
-        elif choose_submenu("Which data would you like to graph?", [("x-values", True),("y-values", False)]):
-            graph_func(data_x)
-        else:
-            graph_func(data_y)
+    figure_number = choose_submenu("What type of graph would you like?", [("Histogram", histogram_menu), ("XY Plot", plot_menu), ("Back", back)]) ()
+def histogram_menu():
+    if num_columns() == 1:
+        graph.histogram(username, data_x, prompt_yes_no("Would you like to save as .jpeg?"))
     else:
-        if not single_column:
-            args = (range(len(data_x)), data_x)
+        result = choose_submenu("Which data would you like to graph?", [("X-values", False),("Y-values", True),("Both",None)])
+        if result == None:
+            graph.histogram_subplots(username, data_x, data_y, prompt_yes_no("Would you like to save as .jpeg?"))
         else:
-            args = (data_x, data_y)
-        graph_func(*args)
-    #TODO: save as .jpeg
-
+            graph.histogram(username, data_x, prompt_yes_no("Would you like to save as .jpeg?"), is_data_for_y=result)
+def plot_menu():
+    if num_columns() != 2:
+        print("Cannot plot data with only 1 variable!")
+        return
+    choose_submenu("What type of X-Y plot?", [("Linear", graph.linear),("Semi-Log(x)", graph.semi_logx),("Semi-Log(y)", graph.semi_logy),
+    ("Log-Log", graph.loglog),("All on one figure", graph.plot_subplots)]) (username, data_x, data_y, prompt_yes_no("Would you like to save as .jpeg?"))
+ 
 
 
 ################## Begin Execution #####################
@@ -195,7 +209,6 @@ username = "user"
 unsaved_changes = False
 data_x = None
 data_y = None
-single_column = None
 
 # Main Menu
 while True:
