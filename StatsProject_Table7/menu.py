@@ -14,8 +14,11 @@ TODO: this docstring
 print("menu imported")
 import datetime
 import sys
+import os.path
 import graph
 import stats
+import inputfile
+
 
 ################## Misc Functions #####################
 # Any function that isn't a menu goes in this section
@@ -55,7 +58,7 @@ def choose_submenu(prompt, selection_pairs):
             user_choice = input("> ").strip()
             user_choice = int(user_choice)
             user_choice -= 1  # convert to zero index
-            assert user_choice < len(selection_pairs)
+            assert user_choice < stats.count(selection_pairs)
             return selection_pairs[user_choice][1]
         except (ValueError, AssertionError):  # User enters something that's not an int, or User enters invalid number
             print("'%s' not valid selection, type a number between 1 and %d"%(user_choice, i))
@@ -70,6 +73,7 @@ def stats_strings(x, y=None):
     prints y data as second column to the right of x column.
     """
     output = ""
+    print("test")
     funcs = ["mean", "median", "mode", "variance", "standard_dev", "min", "max", "range"]
     right_width = 6  # number of characters for value on right side of equals sign
     left_width = 12
@@ -120,39 +124,65 @@ def quit_menu():
 def save_menu():
     global unsaved_changes
     # TODO: FIXME: finish this
-    output_name = input('what is the desired output file name? ')
-    header = 'File name:',file_name+'.'+file_type,'Output file name:',output_name+'.txt','Username:',username,'Date and time:',datetime.datetime.now()
-    print(stats_strings(data_x, data_y if num_columns() == 1 else None))
-    for i in range(len(data_x)):
+    output_name = input('what is the desired output file name?\n> ')
+    print('Input file name:',inputfile.file_name + OUR_FILE_EXTEN,' |||  Output file name:', output_name + '.txt',' |||  Username:', username,' |||  Date and time:', datetime.datetime.now())
+    #print(header)
+    #print(stats_strings(data_x, data_y if num_columns() == 2 else None))
+    for i in range(stats.count(data_x)):
         print(data_x[i],data_y[i], sep=',')
     unsaved_changes = False
     pause()
 
 def load_menu():
+    """User loads data from file"""
     global data_x, data_y, unsaved_changes
+    if num_columns() != 0:
+        if not prompt_yes_no("You already have data loaded in this session. If you proceed, existing data will be discarded, and new data will be loaded. \nDo you wish to proceed?"):
+            return
+    input_xy = inputfile.inputfile()
+    if input_xy == None:
+        return
+    data_x, data_y = input_xy
+
+    unsaved_changes = True
     ## Manually setting data temporarily, just so I have something to test with
-    data_x = [1,2,5,6]  # temporary
-    data_y = [9, 6, 1, 10] # temporary
-    unsaved_changes = True # temporary
-    # TODO: actually load data
-    # TODO: prompt user whether or override all existing data with data loaded in, or append new data (and if so, make sure the number of columns match)
-    # TODO (optional): read username from file name if username still 'user'
-    # TODO (optional): 
+    #data_x = [1,2,5,6]  # temporary
+    #data_y = [9, 6, 1, 10] # temporary
+    #unsaved_changes = True # temporary
 
 def add_data_menu():
     """user enters data manually"""
     global data_x, data_y, unsaved_changes
     single_column = num_columns() == 1
     if num_columns() == 0:  # no data yet
-        single_column = choose_submenu("Enter one or two collums?", [("One",True),("Two",False),("Back",None)])
+        single_column = choose_submenu("Enter one or two columns?", [("One",True),("Two",False),("Back",None)])
         if single_column == None:  # user selected cancel
             return
     if single_column:
-        pass # TODO
+        data_x = []
+        while True:
+                try:
+                    x = (input("enter value (or 'q' to quit)\n> "))
+                    if x == 'q':
+                        break
+                    else:
+                        data_x.append(float(x))
+                except ValueError:
+                    print("Value not recognized, enter only numbers")
     else:
-        pass # TODO
-    unsaved_changes = True
-    # TODO
+        data_x = []
+        data_y = []
+        while True:
+                try:
+                    x = input("enter x value (enter 'q' to quit)\n> ")
+                    if x == 'q':
+                        break 
+                    x = float(x)
+                    y = float(input("enter corresponding y value (enter 'q' to quit)\n> "))
+                    data_x.append(x)
+                    data_y.append(y)
+                except ValueError:
+                    print("Value not recognized, enter only numbers")
 
 def username_menu():
     """Set username"""
@@ -165,8 +195,6 @@ def stats_menu():
     """Prints statistic data to console, option for user to save data 
     to file immediately (same save feature on main menu)"""
     global data_x, data_y
-    if data_x == None:
-        return
     if num_columns() == 1:
         print(stats_strings(data_x, data_y))
     elif num_columns() == 2:
@@ -184,6 +212,7 @@ def graph_menu():
         print("No data to graph! Choose 'Load data' or 'Add data'.")
         return
     figure_number = choose_submenu("What type of graph would you like?", [("Histogram", histogram_menu), ("XY Plot", plot_menu), ("Back", back)]) ()
+
 def histogram_menu():
     if num_columns() == 1:
         graph.histogram(username, data_x, prompt_yes_no("Would you like to save as .jpeg?"))
@@ -209,12 +238,14 @@ username = "user"
 unsaved_changes = False
 data_x = None
 data_y = None
+OUR_FILE_EXTEN = ".txt"
+
 
 # Main Menu
 while True:
     choose_submenu("----------\nMain Menu\n----------",[
         ("Save data", save_menu),
-        ("Load data", load_menu),
+        ("Load data {}".format("(Data loaded from )" if unsaved_changes else "(No data loaded)"), load_menu),
         ("Add data", add_data_menu),
         ("Set username (Current Username: [{}])".format(username), username_menu),
         ("Show statistics", stats_menu),

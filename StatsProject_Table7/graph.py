@@ -2,8 +2,7 @@ import matplotlib.pyplot as plt
 import datetime
 from PIL import Image
 from os import remove
-
-
+import stats
 
 #x = [1,10,100]
 #y = [1,10,100]
@@ -11,7 +10,9 @@ from os import remove
 def histogram(username, alist, save_picture, is_data_for_y=False):
     ''' function histogram takes in a list, returns a histogram of the values in the list, plot has title and axes. 
     :is_data_for_x: is a Boolean that specifies if data is from x or y, so that file can be saved with correct figure number'''
-    bins = int(len(alist)/2)  # FIXME: better algrorithm is needed, especially for data with 100,000+ points
+    bins = int(stats.count(alist)/10)
+    bins = stats.max((bins, 50))
+    bins = stats.min((bins, 5))
     plt.hist(alist,bins = bins, color = 'maroon')
     plt.title("%s data" % ("y" if is_data_for_y else "x"))
     plt.xlabel('value')
@@ -92,7 +93,23 @@ def plot_subplots(username, xlist, ylist, save_picture):
     plt.show()
 
 def histogram_subplots(username, xlist, ylist, save_picture):
-    # TODO: plot histograms of x and y values side-by-side
+    plt.subplot(1,2,1)
+    bins = int(stats.count(xlist)/10)
+    bins = stats.max((bins, 50))
+    bins = stats.min((bins, 5))
+    plt.hist(xlist,bins = bins, color = 'maroon')
+    plt.title("%s data" % ("x"))
+    plt.xlabel('x values')
+    plt.ylabel('frequency')
+
+    plt.subplot(1,2,2)
+    bins = int(stats.count(ylist)/10)
+    bins = stats.max((bins, 50))
+    bins = stats.min((bins, 5))
+    plt.hist(ylist,bins = bins, color = 'maroon')
+    plt.title("%s data" % ("y"))
+    plt.xlabel('y values')
+    plt.ylabel('frequency')
     if save_picture:
         savefig_as_jpeg(username, 6)
     plt.show()
@@ -100,6 +117,9 @@ def histogram_subplots(username, xlist, ylist, save_picture):
 
 
 def savefig_as_jpeg(username, figure_number):
+    """Wrote this function before I realized that you could do plt.savefig(..., format="jpeg")
+    But I spent a lot of time to figure this out, so I'm leaving it
+    """
     plt.savefig("temp.png", format="png") # matplotlib cannot save as jpeg
     temp_png = Image.open("temp.png","r") # RGBA format
     png = temp_png.convert("RGB")  # drop alpha channel

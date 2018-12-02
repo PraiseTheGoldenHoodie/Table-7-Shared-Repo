@@ -19,7 +19,7 @@ functions:
     standard_dev
     min
     max
-    range
+    range2 # since range() is already built in
     count
     sum
 """
@@ -28,7 +28,7 @@ print("stats imported")
 
 def mean(alist):
     """
-    :param alist: alist of data that'll be used to find mean
+    :param alist: list of data that'll be used to find mean
     :return: mean value as a float
     """
     total = 0
@@ -37,6 +37,7 @@ def mean(alist):
         # Running sum
     avg = total / count(alist)
     # Sum divided by the amount of characters in the alist to find the mean
+    print("debug")
     return avg
 
 def median(alist):
@@ -60,22 +61,21 @@ def mode(alist):  # FIXME: doesn't work when I've tried it
     :param alist: list of data that will be used to find mode
     :return: mode_val as an integer if more than one mode returns as tuple
     """
-    modes = {}
-    mode_val = []
-    for i in alist:
-        if i in modes:
-            modes[i] += 1
+    mode = []
+    counts = {}
+    for i in range(count(alist)):
+        if alist[i] in counts:
+            counts[alist[i]] += 1
         else:
-            modes[i] = 1
-    freq = max(list(modes.values()))
-    for key, val in modes.items():
-        if freq == val:
-            mode_val.append(key)
-    if len(mode_val) > 1:
-        mode_val = tuple(mode_val)
-    else:
-        mode_val = int(mode_val[0])
-    return mode_val
+            counts[alist[i]] = 1
+    max_not = None
+    for key in counts:
+        if max_not == None or counts[key] > max_not:
+            max_not = counts[key]
+    for key in counts:
+        if counts[key] == max_not:
+            mode.append(key)
+    return mode
 
 def variance(alist):
     """
@@ -85,7 +85,7 @@ def variance(alist):
     summ = 0
     for val in alist:
         summ += ((float(val) - mean(alist)) ** 2)
-    var_val = summ / len(alist)
+    var_val = summ / count(alist)
     # This is the variance formula. Riveting.
     return  var_val
 
@@ -123,7 +123,7 @@ def max(alist):
             max_val = i
     return max_val
 
-def range(alist):
+def range2(alist):
     """
     :param alist: list of data that'll be used to find the range
     :return: range value in the form of a float
@@ -154,10 +154,33 @@ def sum(alist):
     # Adds each term in the list to a sum variable as the loop iterates through the list, finding the summation
     return summ
 
+def sort(xlist, ylist=None):  # FIXME
+    """Stable ascending sort of xlist. Optional ylist param takes in a list parallel to xlist to be sorted as well.""" 
+    if count(xlist) != count(ylist):
+        raise ValueError("Lists are different lengths!")
+    for i in range(1, len(xlist)):
+        key = xlist[i]
+        if ylist != None:
+            ykey = ylist[i]
+        j = i - 1
+        while j >= 0 and key < xlist[j]:
+            xlist[j + 1] = xlist[j]
+            if ylist != None:
+                ylist[j + 1] = ylist[j]
+            j -= 1
+        xlist[j + 1] = key
+        if ylist != None:
+            ylist[j + 1] = ykey
+
+    return xlist, ylist
+
+print("echo")
 # Available to test a list if the user so desires
+listx = [111,2,333,4,55555,6,77,888,99]
+listy = [1,22,3,444,5555,6666,777,88,9999]
 # print(mean(list))
 # print(median(list))
-# print(mode(list))
+#print(mode(list1), type(mode(list1)))
 # print(variance(list))
 # print(standard_dev(list))
 # print(min(list))
@@ -165,3 +188,5 @@ def sum(alist):
 # print(range(list))
 # print(count(list))
 # print(sum(list))
+
+print(repr(sort(listx, listy)))
