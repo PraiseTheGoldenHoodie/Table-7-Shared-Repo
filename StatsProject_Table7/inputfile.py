@@ -1,4 +1,24 @@
-print("inputfile imported")
+# By submitting this assignment, I agree to the following:
+#  “Aggies do not lie, cheat, or steal, or tolerate those who do”
+#  “I have not given or received any unauthorized aid on this assignment”
+# Names:            Alexander Bockelman
+#                   Jose Carrillo
+#                   Patrick Chai
+#                   Jackson Sanders
+# Section:          211
+# Assignment:       Python Statistics Project
+# Date:             2 12 2018
+
+try:
+    from . import stats
+except ImportError:
+    try:
+        import stats
+    except ImportError:
+        print("That's not how you import this module!")
+        import sys
+        sys.exit()
+
 def csv_tsv(file_type):
     """takes in file type, returns file type indicator"""
     if file_type == 'csv':
@@ -17,7 +37,7 @@ def inputfile():
         if raw_in.lower() == "c":
             break
         raw_in = raw_in.rsplit('.',1)
-        if len(raw_in) != 2:
+        if stats.count(raw_in) != 2:
             print("Invalid file path, must include an extension (e.g. '.txt')")
             continue
         file_name, file_type = raw_in
@@ -31,7 +51,7 @@ def inputfile():
                     data_y = []
                     # loop through data, check for headers, then strip unnecessary characters from numbers, then convert to floats and into lists
                     for line in data:
-                        if line[0].isnumeric() is True:
+                        if line[0].isnumeric() or line[0] == '-':
                             if ',' in line:
                                 line = line.split(',')
                                 line[0].strip('"')
@@ -72,7 +92,7 @@ def inputfile():
                         else:
                             data_x.append(float(line))
                             data_y = None
-                    if len(data_x) == 0:
+                    if stats.count(data_x) == 0:
                         print("No readable data in file")
 
             return data_x, data_y

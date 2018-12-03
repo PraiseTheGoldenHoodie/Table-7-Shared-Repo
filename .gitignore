@@ -6,6 +6,8 @@
 git_ignored_files/*
 !git_ignored_files/readme.txt
 *.jpeg
+*.jpg
+*.png
 
 # Auto-generated list
 

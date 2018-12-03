@@ -1,13 +1,14 @@
 # By submitting this assignment, I agree to the following:
 #  “Aggies do not lie, cheat, or steal, or tolerate those who do”
 #  “I have not given or received any unauthorized aid on this assignment”
-# Names: 	Alexander Bockelman
-#           Jose Carrillo
-# 	 		Patrick Chai
-# 	 		Jackson Sanders
-# Section:		211
-# Assignment:	Python Statistics Project
-# Date:		24 11 2018
+# Names:            Alexander Bockelman
+#                   Jose Carrillo
+#                   Patrick Chai
+#                   Jackson Sanders
+# Section:          211
+# Assignment:       Python Statistics Project
+# Date:             2 12 2018
+
 """
 Module that contains all statistic functions defined for this package.
 
@@ -24,8 +25,6 @@ functions:
     sum
 """
 
-print("stats imported")
-
 def mean(alist):
     """
     :param alist: list of data that'll be used to find mean
@@ -37,7 +36,6 @@ def mean(alist):
         # Running sum
     avg = total / count(alist)
     # Sum divided by the amount of characters in the alist to find the mean
-    print("debug")
     return avg
 
 def median(alist):
@@ -56,7 +54,7 @@ def median(alist):
         middle = (upper + lower) / 2
         return middle
 
-def mode(alist):  # FIXME: doesn't work when I've tried it
+def mode(alist):
     """
     :param alist: list of data that will be used to find mode
     :return: mode_val as an integer if more than one mode returns as tuple
@@ -75,7 +73,7 @@ def mode(alist):  # FIXME: doesn't work when I've tried it
     for key in counts:
         if counts[key] == max_not:
             mode.append(key)
-    return mode
+    return mode[0]  # return the first mode
 
 def variance(alist):
     """
@@ -154,11 +152,11 @@ def sum(alist):
     # Adds each term in the list to a sum variable as the loop iterates through the list, finding the summation
     return summ
 
-def sort(xlist, ylist=None):  # FIXME
+def sort(xlist, ylist=None): 
     """Stable ascending sort of xlist. Optional ylist param takes in a list parallel to xlist to be sorted as well.""" 
     if count(xlist) != count(ylist):
         raise ValueError("Lists are different lengths!")
-    for i in range(1, len(xlist)):
+    for i in range(1, count(xlist)):
         key = xlist[i]
         if ylist != None:
             ykey = ylist[i]
@@ -173,20 +171,3 @@ def sort(xlist, ylist=None):  # FIXME
             ylist[j + 1] = ykey
 
     return xlist, ylist
-
-print("echo")
-# Available to test a list if the user so desires
-listx = [111,2,333,4,55555,6,77,888,99]
-listy = [1,22,3,444,5555,6666,777,88,9999]
-# print(mean(list))
-# print(median(list))
-#print(mode(list1), type(mode(list1)))
-# print(variance(list))
-# print(standard_dev(list))
-# print(min(list))
-# print(max(list))
-# print(range(list))
-# print(count(list))
-# print(sum(list))
-
-print(repr(sort(listx, listy)))

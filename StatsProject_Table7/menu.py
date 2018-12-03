@@ -1,25 +1,31 @@
 # By submitting this assignment, I agree to the following:
 #  “Aggies do not lie, cheat, or steal, or tolerate those who do”
 #  “I have not given or received any unauthorized aid on this assignment”
-# Names:     Alexander Bockelman
-#            Jose Carrillo
-#             Patrick Chai
-#             Jackson Sanders
-# Section:        211
-# Assignment:    Python Statistics Project
-# Date:        1 12 2018
+# Names:            Alexander Bockelman
+#                   Jose Carrillo
+#                   Patrick Chai
+#                   Jackson Sanders
+# Section:          211
+# Assignment:       Python Statistics Project
+# Date:             2 12 2018
+
 """
-TODO: this docstring
+Ladies and gentlemen, welcome to the show. In this category 5 hurricane of a program, you're going to have the
+most wonderful pleasure of entering or importing data and doing lots and lots of stuff with it. That stuff 
+consists of analyzing many a statistical data, throwing your data into several types of graphs, and writing everything
+you do onto a file... just to name a few. We hope you have just as much fun using our program as we did designing it. 
 """
-print("menu imported")
 import datetime
 import sys
-import os.path
-import graph
-import stats
-import inputfile
-
-
+try:
+    from . import inputfile, stats, graph
+except ImportError:
+    try:
+        import inputfile, stats, graph
+    except ImportError:
+        print("That's not how you import this module!")
+        import sys
+        sys.exit()
 ################## Misc Functions #####################
 # Any function that isn't a menu goes in this section
 
@@ -73,22 +79,22 @@ def stats_strings(x, y=None):
     prints y data as second column to the right of x column.
     """
     output = ""
-    print("test")
-    funcs = ["mean", "median", "mode", "variance", "standard_dev", "min", "max", "range"]
+    funcs = ["mean", "median", "mode", "variance", "standard_dev", "min", "max", "range2"]
     right_width = 6  # number of characters for value on right side of equals sign
     left_width = 12
     dec_prec = 2  # number of decimal places
     column_padding = 8*" "  # between x and y columns
     # the following lines evaluate each func (e.g. "mean" becomes stats.mean(x)), with the func's name and result put into formatted string.
     for func in funcs:
-        output += "{:{lw}} = {:>{rw}.{dp}f}".format(func, eval("stats."+func+"(x)"), lw=left_width, rw=right_width, dp=dec_prec)
+        #output += "{:{lw}} = {:>{rw}.{dp}f}".format(func, eval("stats."+func+"(x)"), lw=left_width, rw=right_width, dp=dec_prec)
+        output += "x {:{lw}} = {:>{rw}.{dp}f}".format(func, eval("stats."+func+"(x)"), lw=left_width, rw=right_width, dp=dec_prec)
         if y != None:
-            output += column_padding + "{:{lw}} = {:>{rw}.{dp}f}".format(func, eval("stats."+func+"(y)"), lw=left_width, rw=right_width, dp=dec_prec)
+            output += column_padding + "y {:{lw}} = {:>{rw}.{dp}f}".format(func, eval("stats."+func+"(y)"), lw=left_width, rw=right_width, dp=dec_prec)
         output += "\n"
     # count, the only integer, needs ever so slightly differnt format string.
-    output += "{:{lw}} = {:>{rw}d}".format("count", stats.count(x), lw=left_width, rw=right_width)
+    output += "x {:{lw}} = {:>{rw}d}".format("count", stats.count(x), lw=left_width, rw=right_width)
     if y != None:
-        output += column_padding + "{:{lw}} = {:>{rw}d}".format("count", stats.count(x), lw=left_width, rw=right_width)
+        output += column_padding + "y {:{lw}} = {:>{rw}d}".format("count", stats.count(x), lw=left_width, rw=right_width)
     output += "\n"
     return output
 
@@ -119,19 +125,40 @@ def quit_menu():
     if unsaved_changes:
         if not prompt_yes_no("Exit without saving?"):
             return
+    
+    print("I hope you have an excellent day")
     sys.exit()
 
 def save_menu():
+    """
+    This is the menu that asks for the name of the function then how you would like to save it. Will spit back any errors you
+    you have while trying to save it too, with no respect for your dignity
+    """
     global unsaved_changes
-    # TODO: FIXME: finish this
-    output_name = input('what is the desired output file name?\n> ')
-    print('Input file name:',inputfile.file_name + OUR_FILE_EXTEN,' |||  Output file name:', output_name + '.txt',' |||  Username:', username,' |||  Date and time:', datetime.datetime.now())
-    #print(header)
-    #print(stats_strings(data_x, data_y if num_columns() == 2 else None))
-    for i in range(stats.count(data_x)):
-        print(data_x[i],data_y[i], sep=',')
-    unsaved_changes = False
-    pause()
+    if num_columns() == 0:
+        print("No data to save!")
+        return
+    while True:
+        output_name = input('what is the desired output file name?\n> ')
+        try:
+            with open(output_name+'.txt', "w") as output_file:
+                output_file.write('Input file name: '+inputfile.file_name + OUR_FILE_EXTEN+'  |||  Output file name: '+ 
+                output_name + '.txt |||  Username: '+ username +'  |||  Date and time: '+ str(datetime.datetime.now()) + '\n')
+                output_file.write(stats_strings(data_x, data_y if num_columns() == 2 else None) + '\n')
+                for i in range(stats.count(data_x)):
+                    if num_columns() == 1:
+                        output_file.write(str(data_x[i]))
+                    else:
+                        output_file.write(str(data_x[i])+','+str(data_y[i]))
+                    output_file.write("\n")
+            unsaved_changes = False
+            print("File successfully saved")
+            break
+        except OSError as err:
+            print("Unable to save:", err)
+            if not prompt_yes_no("Would you like to retry saving?"):
+                break
+
 
 def load_menu():
     """User loads data from file"""
@@ -143,21 +170,19 @@ def load_menu():
     if input_xy == None:
         return
     data_x, data_y = input_xy
-
     unsaved_changes = True
-    ## Manually setting data temporarily, just so I have something to test with
-    #data_x = [1,2,5,6]  # temporary
-    #data_y = [9, 6, 1, 10] # temporary
-    #unsaved_changes = True # temporary
 
 def add_data_menu():
     """user enters data manually"""
     global data_x, data_y, unsaved_changes
     single_column = num_columns() == 1
+    prior_data_len = 0
     if num_columns() == 0:  # no data yet
         single_column = choose_submenu("Enter one or two columns?", [("One",True),("Two",False),("Back",None)])
         if single_column == None:  # user selected cancel
-            return
+            return       
+    else:
+        prior_data_len = stats.count(data_x)
     if single_column:
         data_x = []
         while True:
@@ -183,6 +208,14 @@ def add_data_menu():
                     data_y.append(y)
                 except ValueError:
                     print("Value not recognized, enter only numbers")
+    if stats.count(data_x) == prior_data_len:
+        if prior_data_len == 0:
+            data_x = None
+    else:
+        if num_columns() == 0:
+            inputfile.file_name = "keyboard input"
+        unsaved_changes = True
+
 
 def username_menu():
     """Set username"""
@@ -195,9 +228,9 @@ def stats_menu():
     """Prints statistic data to console, option for user to save data 
     to file immediately (same save feature on main menu)"""
     global data_x, data_y
-    if num_columns() == 1:
+    if num_columns() == 2:
         print(stats_strings(data_x, data_y))
-    elif num_columns() == 2:
+    elif num_columns() == 1:
         print(stats_strings(data_x))
     else:
         print("No data to analyze! Choose 'Load data' or 'Add data'.")
@@ -211,9 +244,12 @@ def graph_menu():
     if num_columns() == 0:
         print("No data to graph! Choose 'Load data' or 'Add data'.")
         return
-    figure_number = choose_submenu("What type of graph would you like?", [("Histogram", histogram_menu), ("XY Plot", plot_menu), ("Back", back)]) ()
+    choose_submenu("What type of graph would you like?", [("Histogram", histogram_menu), ("XY Plot", plot_menu), ("Back", back)]) ()
 
 def histogram_menu():
+    """
+    Brings up the histogram menu and has the user input the settings for which they would like to see their data in a histogram
+    """
     if num_columns() == 1:
         graph.histogram(username, data_x, prompt_yes_no("Would you like to save as .jpeg?"))
     else:
@@ -222,15 +258,18 @@ def histogram_menu():
             graph.histogram_subplots(username, data_x, data_y, prompt_yes_no("Would you like to save as .jpeg?"))
         else:
             graph.histogram(username, data_x, prompt_yes_no("Would you like to save as .jpeg?"), is_data_for_y=result)
+
 def plot_menu():
+    """
+    This asks the user which kind of plot they would like to put their data in
+    """
     if num_columns() != 2:
         print("Cannot plot data with only 1 variable!")
         return
+    sorted_x, sorted_y = stats.sort(data_x, data_y)
     choose_submenu("What type of X-Y plot?", [("Linear", graph.linear),("Semi-Log(x)", graph.semi_logx),("Semi-Log(y)", graph.semi_logy),
-    ("Log-Log", graph.loglog),("All on one figure", graph.plot_subplots)]) (username, data_x, data_y, prompt_yes_no("Would you like to save as .jpeg?"))
+    ("Log-Log", graph.loglog),("All of the above on one figure", graph.plot_subplots)]) (username, sorted_x, sorted_y, prompt_yes_no("Would you like to save as .jpeg?"))
  
-
-
 ################## Begin Execution #####################
 
 # Initialize variables
@@ -239,13 +278,14 @@ unsaved_changes = False
 data_x = None
 data_y = None
 OUR_FILE_EXTEN = ".txt"
-
+inputfile.file_name = "ERROR: NO DATA"
 
 # Main Menu
 while True:
+    t =  num_columns() != 0
     choose_submenu("----------\nMain Menu\n----------",[
         ("Save data", save_menu),
-        ("Load data {}".format("(Data loaded from )" if unsaved_changes else "(No data loaded)"), load_menu),
+        ("Load data {}".format("(Data loaded from "+inputfile.file_name+")" if t else "(No data loaded)") , load_menu),
         ("Add data", add_data_menu),
         ("Set username (Current Username: [{}])".format(username), username_menu),
         ("Show statistics", stats_menu),

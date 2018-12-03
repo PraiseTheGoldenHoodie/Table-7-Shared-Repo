@@ -1,11 +1,29 @@
+# By submitting this assignment, I agree to the following:
+#  “Aggies do not lie, cheat, or steal, or tolerate those who do”
+#  “I have not given or received any unauthorized aid on this assignment”
+# Names:            Alexander Bockelman
+#                   Jose Carrillo
+#                   Patrick Chai
+#                   Jackson Sanders
+# Section:          211
+# Assignment:       Python Statistics Project
+# Date:             2 12 2018
+
 import matplotlib.pyplot as plt
 import datetime
-from PIL import Image
-from os import remove
-import stats
+try:
+    from . import stats
+except ImportError:
+    try:
+        import stats
+    except ImportError:
+        print("That's not how you import this module!")
+        import sys
+        sys.exit()
 
-#x = [1,10,100]
-#y = [1,10,100]
+# Here are some example lists if you're too lazy to come up with your own
+# x = [1,10,100]
+# y = [1,10,100]
 
 def histogram(username, alist, save_picture, is_data_for_y=False):
     ''' function histogram takes in a list, returns a histogram of the values in the list, plot has title and axes. 
@@ -88,11 +106,13 @@ def plot_subplots(username, xlist, ylist, save_picture):
     plt.title('log log plot of data values')
     plt.xlabel('log x data values')
     plt.ylabel('log y data values')
+    plt.subplots_adjust(hspace=0.6)
     if save_picture:
         savefig_as_jpeg(username, 6)
     plt.show()
 
 def histogram_subplots(username, xlist, ylist, save_picture):
+    """This one will print out two histograms, side by side, displaying x's and y's individually"""
     plt.subplot(1,2,1)
     bins = int(stats.count(xlist)/10)
     bins = stats.max((bins, 50))
@@ -120,13 +140,12 @@ def savefig_as_jpeg(username, figure_number):
     """Wrote this function before I realized that you could do plt.savefig(..., format="jpeg")
     But I spent a lot of time to figure this out, so I'm leaving it
     """
-    plt.savefig("temp.png", format="png") # matplotlib cannot save as jpeg
-    temp_png = Image.open("temp.png","r") # RGBA format
-    png = temp_png.convert("RGB")  # drop alpha channel
     file_name = "{}_{}_Fig_{}.jpeg".format(username, datetime.datetime.now().date().isoformat(), figure_number)
-    png.save(file_name)
-    remove("temp.png")
-
+    try:
+        plt.savefig(file_name, format="jpeg")
+    except ValueError:
+        print("Unabled to save as JPEG, saving as PNG instead.")
+        plt.savefig(file_name, format="png")
 
 #subplots(x,y)
 #plt.savefig('dataplot.jpg')
