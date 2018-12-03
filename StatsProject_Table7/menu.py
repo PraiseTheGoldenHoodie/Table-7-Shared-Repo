@@ -212,8 +212,6 @@ def add_data_menu():
             data_x = None
             data_y = None
     else:
-        if num_columns() == 0:
-            inputfile.file_name = "keyboard input"
         unsaved_changes = True
 
 
@@ -278,7 +276,7 @@ unsaved_changes = False
 data_x = None
 data_y = None
 OUR_FILE_EXTEN = ".txt"
-inputfile.file_name = "ERROR: NO DATA"
+inputfile.file_name = "keyboard input"
 
 # Main Menu
 while True:
