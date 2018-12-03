@@ -162,7 +162,7 @@ def save_menu():
 
 def load_menu():
     """User loads data from file"""
-    global data_x, data_y, unsaved_changes
+    global data_x, data_y
     if num_columns() != 0:
         if not prompt_yes_no("You already have data loaded in this session. If you proceed, existing data will be discarded, and new data will be loaded. \nDo you wish to proceed?"):
             return
@@ -170,7 +170,6 @@ def load_menu():
     if input_xy == None:
         return
     data_x, data_y = input_xy
-    unsaved_changes = True
 
 def add_data_menu():
     """user enters data manually"""
@@ -208,9 +207,10 @@ def add_data_menu():
                     data_y.append(y)
                 except ValueError:
                     print("Value not recognized, enter only numbers")
-    if stats.count(data_x) == prior_data_len:
-        if prior_data_len == 0:
+    if stats.count(data_x) == prior_data_len:  # No changes made
+        if prior_data_len == 0:  # No data
             data_x = None
+            data_y = None
     else:
         if num_columns() == 0:
             inputfile.file_name = "keyboard input"
