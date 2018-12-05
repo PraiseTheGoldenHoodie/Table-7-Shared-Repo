@@ -11,6 +11,7 @@
 
 """
 Module that contains all statistic functions defined for this package.
+All of the following functions assume list parameters are non-empty and contain only ints or floats
 
 functions:
     mean

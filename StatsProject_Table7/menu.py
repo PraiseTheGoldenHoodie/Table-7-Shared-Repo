@@ -92,7 +92,7 @@ def stats_strings(x, y=None):
         if y != None:
             output += column_padding + "y {:{lw}} = {:>{rw}.{dp}f}".format(func, eval("stats."+func+"(y)"), lw=left_width, rw=right_width, dp=dec_prec)
         output += "\n"
-    # count, the only integer, needs ever so slightly differnt format string.
+    # count, the only integer stat, needs ever so slightly differnt format string. 
     output += "x {:{lw}} = {:>{rw}d}".format("count", stats.count(x), lw=left_width, rw=right_width)
     if y != None:
         output += column_padding + "y {:{lw}} = {:>{rw}d}".format("count", stats.count(x), lw=left_width, rw=right_width)
@@ -165,13 +165,14 @@ def save_menu():
 
 def load_menu():
     """User loads data from file"""
-    global data_x, data_y
+    global data_x, data_y, unsaved_changes
     if num_columns() != 0:
         if not prompt_yes_no("You already have data loaded in this session. If you proceed, existing data will be discarded, and new data will be loaded. \nDo you wish to proceed?"):
             return
     input_xy = inputfile.inputfile()
     if input_xy == None:
         return
+    unsaved_changes = False
     data_x, data_y = input_xy
 
 def add_data_menu():
@@ -180,13 +181,16 @@ def add_data_menu():
     single_column = num_columns() == 1
     prior_data_len = 0
     if num_columns() == 0:  # no data yet
-        single_column = choose_submenu("Enter one or two columns?", [("One",True),("Two",False),("Back",None)])
+        single_column = choose_submenu("Create new data set with one or two columns?", [("One",True),("Two",False),("Back",None)])
         if single_column == None:  # user selected cancel
-            return       
+            return     
+        # Create new data since none loaded
+        if not single_column:
+            data_y = []
+        data_x = []          
     else:
-        prior_data_len = stats.count(data_x)
-    if single_column:
-        data_x = []
+        prior_data_len = stats.count(data_x)  # update to currently loaded data
+    if single_column:  # only x values
         while True:
                 try:
                     x = (input("enter value (or 'q' to quit)\n> "))
@@ -196,26 +200,23 @@ def add_data_menu():
                         data_x.append(float(x))
                 except ValueError:
                     print("Value not recognized, enter only numbers")
-    else:
-        data_x = []
-        data_y = []
+    else:  # both x and y values
         while True:
                 try:
                     x = input("enter x value (enter 'q' to quit)\n> ")
                     if x == 'q':
                         break 
                     x = float(x)
-                    y = float(input("enter corresponding y value (enter 'q' to quit)\n> "))
+                    y = float(input("enter corresponding y value\n> "))
                     data_x.append(x)
                     data_y.append(y)
                 except ValueError:
                     print("Value not recognized, enter only numbers")
-    if stats.count(data_x) == prior_data_len:  # No changes made
-        if prior_data_len == 0:  # No data
-            data_x = None
-            data_y = None
-    else:
+    if stats.count(data_x) != prior_data_len: # changes made if more data points than before
         unsaved_changes = True
+    if stats.count(data_x) == 0:  # check if empty data set
+        data_x = None  # data as None means no data loaded; leaving data as an empty array can cause ZeroDivision and other errors elsewhere
+        data_y = None
 
 
 def username_menu():
@@ -236,7 +237,7 @@ def stats_menu():
     else:
         print("No data to analyze! Choose 'Load data' or 'Add data'.")
         return
-    if prompt_yes_no("Would you like to save these stats?"):
+    if prompt_yes_no("Would you like to save these stats? (This can also be done later from 'save data' on main menu)"):
         save_menu()
 
 def graph_menu():
