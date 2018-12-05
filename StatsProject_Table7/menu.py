@@ -17,6 +17,7 @@ you do onto a file... just to name a few. We hope you have just as much fun usin
 """
 import datetime
 import sys
+
 try:
     from . import inputfile, stats, graph
 except ImportError:
@@ -26,6 +27,7 @@ except ImportError:
         print("That's not how you import this module!")
         import sys
         sys.exit()
+
 ################## Misc Functions #####################
 # Any function that isn't a menu goes in this section
 
@@ -86,7 +88,6 @@ def stats_strings(x, y=None):
     column_padding = 8*" "  # between x and y columns
     # the following lines evaluate each func (e.g. "mean" becomes stats.mean(x)), with the func's name and result put into formatted string.
     for func in funcs:
-        #output += "{:{lw}} = {:>{rw}.{dp}f}".format(func, eval("stats."+func+"(x)"), lw=left_width, rw=right_width, dp=dec_prec)
         output += "x {:{lw}} = {:>{rw}.{dp}f}".format(func, eval("stats."+func+"(x)"), lw=left_width, rw=right_width, dp=dec_prec)
         if y != None:
             output += column_padding + "y {:{lw}} = {:>{rw}.{dp}f}".format(func, eval("stats."+func+"(y)"), lw=left_width, rw=right_width, dp=dec_prec)
@@ -110,12 +111,14 @@ def num_columns():
             return 1
         else:
             return 2
+
 ################## Menu Functions #####################
 # These menu functions replace the ugly, hard-to-read, hard-to-maintain if-elif-elif-...-else statements
 # in controlling navigation between question prompts. They take no parameters, return None, and
 # output any changes they have made by declaring the affected variable as 'global'
 # be aware not to excede 1,000 menus within menus - this is only a risk if the menu calls itself, or calls
 # a menu that calls the first, etc. 
+
 def back():
     """Placeholder function used by other menus calling choose_submenu."""
     return
@@ -233,7 +236,8 @@ def stats_menu():
     else:
         print("No data to analyze! Choose 'Load data' or 'Add data'.")
         return
-    # TODO: asks user if they want to save, and does so if so.
+    if prompt_yes_no("Would you like to save these stats?"):
+        save_menu()
 
 def graph_menu():
     """

@@ -16,4 +16,3 @@ using a new username. Until commanded to stop, the file will continue to run, en
 you will grow weary of weilding such power in the form of this Statistics Project program. At that point, you may opt to quit out,
 leaving all the data behind without a trace, or saving the data into a file. 
 """
-#__all__ = ["menu","graph","stats","inputfile"]

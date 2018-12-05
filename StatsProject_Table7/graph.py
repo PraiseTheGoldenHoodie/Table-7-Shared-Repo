@@ -26,11 +26,13 @@ except ImportError:
 # y = [1,10,100]
 
 def histogram(username, alist, save_picture, is_data_for_y=False):
-    ''' function histogram takes in a list, returns a histogram of the values in the list, plot has title and axes. 
-    :is_data_for_x: is a Boolean that specifies if data is from x or y, so that file can be saved with correct figure number'''
+    ''' 
+    function histogram takes in a list, returns a histogram of the values in the list, plot has title and axes. 
+    :is_data_for_x: is a Boolean that specifies if data is from x or y, so that file can be saved with correct figure number
+    '''
     bins = int(stats.count(alist)/10)
-    bins = stats.max((bins, 50))
-    bins = stats.min((bins, 5))
+    bins = stats.min((bins, 50))
+    bins = stats.max((bins, 5))
     plt.hist(alist,bins = bins, color = 'maroon')
     plt.title("%s data" % ("y" if is_data_for_y else "x"))
     plt.xlabel('value')
@@ -115,8 +117,8 @@ def histogram_subplots(username, xlist, ylist, save_picture):
     """This one will print out two histograms, side by side, displaying x's and y's individually"""
     plt.subplot(1,2,1)
     bins = int(stats.count(xlist)/10)
-    bins = stats.max((bins, 50))
-    bins = stats.min((bins, 5))
+    bins = stats.min((bins, 50))
+    bins = stats.max((bins, 5))
     plt.hist(xlist,bins = bins, color = 'maroon')
     plt.title("%s data" % ("x"))
     plt.xlabel('x values')
@@ -124,20 +126,21 @@ def histogram_subplots(username, xlist, ylist, save_picture):
 
     plt.subplot(1,2,2)
     bins = int(stats.count(ylist)/10)
-    bins = stats.max((bins, 50))
-    bins = stats.min((bins, 5))
+    bins = stats.min((bins, 50))
+    bins = stats.max((bins, 5))
     plt.hist(ylist,bins = bins, color = 'maroon')
     plt.title("%s data" % ("y"))
     plt.xlabel('y values')
     plt.ylabel('frequency')
     if save_picture:
-        savefig_as_jpeg(username, 6)
+        savefig_as_jpeg(username, 7)
     plt.show()
 
 
 
 def savefig_as_jpeg(username, figure_number):
-    """Wrote this function before I realized that you could do plt.savefig(..., format="jpeg")
+    """
+    Wrote this function before I realized that you could do plt.savefig(..., format="jpeg")
     But I spent a lot of time to figure this out, so I'm leaving it
     """
     file_name = "{}_{}_Fig_{}.jpeg".format(username, datetime.datetime.now().date().isoformat(), figure_number)

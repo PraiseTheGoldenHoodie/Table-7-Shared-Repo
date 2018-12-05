@@ -28,7 +28,6 @@ def csv_tsv(file_type):
     else:
         return 'stop'
 
-
 file_name = "no file"
 def inputfile():
     global file_name
@@ -41,7 +40,6 @@ def inputfile():
             print("Invalid file path, must include an extension (e.g. '.txt')")
             continue
         file_name, file_type = raw_in
-        print(file_name, file_type)
         try:
             # below is code for text file, appends each line (number) to a list after converting to float
             if file_type == 'txt'.lower():
@@ -94,9 +92,8 @@ def inputfile():
                             data_y = None
                     if stats.count(data_x) == 0:
                         print("No readable data in file")
-
+            else:
+                raise ValueError("Unrecognized file extension, use .txt, .csv, or .tsv")
             return data_x, data_y
-        except OSError as err:
+        except (OSError, ValueError) as err:
             print(err)
-
-#inputfile()
