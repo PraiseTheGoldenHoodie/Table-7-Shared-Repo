@@ -7,7 +7,7 @@
 #                   Jackson Sanders
 # Section:          211
 # Assignment:       Python Statistics Project
-# Date:             2 12 2018
+# Date:             5 12 2018
 
 """
 Module that contains all statistic functions defined for this package.

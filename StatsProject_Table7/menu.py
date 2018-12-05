@@ -7,7 +7,7 @@
 #                   Jackson Sanders
 # Section:          211
 # Assignment:       Python Statistics Project
-# Date:             2 12 2018
+# Date:             5 12 2018
 
 """
 Ladies and gentlemen, welcome to the show. In this category 5 hurricane of a program, you're going to have the

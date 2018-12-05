@@ -7,7 +7,7 @@
 #                   Jackson Sanders
 # Section:          211
 # Assignment:       Python Statistics Project
-# Date:             2 12 2018
+# Date:             5 12 2018
 
 """
 This project takes in your data (whether you want to manually input it or upload it from a file) using one or two columns.
